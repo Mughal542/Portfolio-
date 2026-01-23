@@ -1,311 +1,578 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Aqsa Zahid – Digital Creator & Automation Expert</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aqsa Zahid - Social Media & AI Services</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+ <style>
+  /* Custom Tailwind Colors */
+  :root {
+    --primary-bg: #343434;
+    --accent: #f5b027;
+    --text-color: #ffffff;
+  }
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  /* ===== Masked Reveal Text Animation ===== */
+  .reveal-text {
+    display: inline-block;
+    transform: translateY(100%);
+    opacity: 0;
+    animation: reveal 1s ease forwards;
+  }
 
-    <style>
-        /* Global Styling */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "Poppins", sans-serif;
-        }
-        body {
-            background: #0d0d0d;
-            color: #fff;
-            overflow-x: hidden;
-        }
-        a { text-decoration: none; color: inherit; }
+  .reveal-text.delay-200 {
+    animation-delay: 0.2s;
+  }
 
-        /* Header */
-        header {
-            width: 100%;
-            padding: 25px 10%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: fixed;
-            background: rgba(0,0,0,0.7);
-            backdrop-filter: blur(8px);
-            z-index: 1000;
-            border-bottom: 1px solid #181818;
-        }
-        header h1 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #ff0050;
-        }
-        nav a {
-            margin: 0 15px;
-            font-weight: 500;
-            transition: .3s;
-        }
-        nav a:hover {
-            color: #ff0050;
-        }
+  @keyframes reveal {
+    0% {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
 
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 0 10%;
-            background: linear-gradient(135deg, #141414, #1d1d1d);
-        }
-        .hero-content {
-            max-width: 600px;
-        }
-        .hero h2 {
-            font-size: 3rem;
-            font-weight: 700;
-        }
-        .hero h2 span {
-            color: #ff0050;
-        }
-        .hero p {
-            margin: 20px 0;
-            line-height: 1.7;
-            font-size: 1.1rem;
-            color: #cfcfcf;
-        }
-        .btn {
-            display: inline-block;
-            background: #ff0050;
-            color: #fff;
-            padding: 12px 24px;
-            border-radius: 6px;
-            margin-top: 20px;
-            font-weight: 600;
-            transition: 0.3s;
-        }
-        .btn:hover {
-            background: #e60046;
-        }
+  /* ===== Ripple Effect ===== */
+  .ripple::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: inherit;
+    transform: scale(0);
+    opacity: 0;
+    transition: transform 0.5s, opacity 1s;
+  }
 
-        /* Section Header */
-        .section-title {
-            text-align: center;
-            margin-top: 70px;
-            margin-bottom: 40px;
-            font-size: 2.3rem;
-            font-weight: 700;
-        }
-        .section-title span { color: #ff0050; }
+  .ripple:active::after {
+    transform: scale(2);
+    opacity: 1;
+    transition: 0s;
+  }
 
-        /* Services */
-        .services {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            padding: 0 10%;
-        }
-        .service-box {
-            background: #161616;
-            padding: 25px;
-            border-radius: 10px;
-            transition: .3s;
-            border: 1px solid #2b2b2b;
-        }
-        .service-box:hover {
-            transform: translateY(-10px);
-            border-color: #ff0050;
-        }
-        .service-box h3 {
-            font-size: 1.4rem;
-            margin-bottom: 10px;
-            color: #ff0050;
-        }
-        .service-box p {
-            color: #cfcfcf;
-            line-height: 1.6;
-        }
+  /* ===== Floating Motion ===== */
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
 
-        /* Experience */
-        .experience {
-            padding: 0 10%;
-        }
-        .exp-card {
-            background: #161616;
-            padding: 20px;
-            border-radius: 10px;
-            border-left: 4px solid #ff0050;
-            margin-bottom: 18px;
-        }
-        .exp-card h4 {
-            font-size: 1.3rem;
-            color: #ff0050;
-        }
-        .exp-card span {
-            font-size: 0.9rem;
-            color: #bbb;
-        }
-        .exp-card p {
-            margin-top: 10px;
-            line-height: 1.6;
-            color: #ddd;
-        }
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
 
-        /* Contact */
-        .contact {
-            text-align: center;
-            padding: 70px 10%;
-        }
+  /* ===== Scroll Animation (Cards, Grid Items) ===== */
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
 
-        .contact a {
-            font-size: 1.2rem;
-            font-weight: 600;
-            background: #ff0050;
-            padding: 15px 30px;
-            border-radius: 8px;
-            display: inline-block;
-            margin-top: 20px;
-        }
+  .animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 
-        footer {
-            text-align: center;
-            padding: 30px;
-            background: #111;
-            margin-top: 40px;
-            color: #777;
-        }
+  /* ===== Professional Fade-Up Animation (Sections) ===== */
+  .fade-section {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
 
-        /* Scroll Animation */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all .9s ease;
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0px);
-        }
-    </style>
+  .fade-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ===== How It Works List Styling ===== */
+  .how-it-works-list li::marker {
+    color: #f5b027;
+  }
+</style>
+
 </head>
 
-<body>
+<body class="bg-[var(--primary-bg)] text-[var(--text-color)] font-sans">
+  
+  <!-- ===== HEADER + NAVIGATION ===== -->
+  <header class="w-full fixed top-0 left-0 z-50 bg-[var(--primary-bg)] px-6 py-4 flex justify-between items-center shadow-md">
+    <!-- Logo / Brand -->
+    <div class="text-2xl font-bold text-[var(--text-color)]">
+      Aqsa Zahid<span class="text-[#f5b027]">.</span>
+    </div>
+   <!-- Navigation Links (if wanna add) -->
+    <nav class="flex gap-6 text-[var(--text-color)] font-bold text-lg">
 
-    <!-- HEADER -->
-    <header>
-        <h1>Aqsa.</h1>
-        <nav>
-            <a href="#services">Services</a>
-            <a href="#experience">Experience</a>
-            <a href="#contact">Contact</a>
-        </nav>
-    </header>
+      <p>100% client satisfaction &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p> 
+    </nav>
+  </header>
 
-    <!-- HERO -->
-    <section class="hero">
-        <div class="hero-content reveal">
-            <h2>Hello, I'm <span>Aqsa Zahid</span></h2>
-            <p>
-                A Fiverr Certified Social Media Expert, YouTube Automation Strategist,  
-                AI Image/Voice Artist, Content Writer, and Video Editor helping brands grow  
-                with high-quality digital content & creative automation.
-            </p>
-            <a class="btn" href="https://skillsetpr0.github.io/Profile/" target="_blank">Visit Portfolio</a>
+  <!-- ===== 1. HOME (First Impression) ===== -->
+  <section id="home" class="min-h-screen flex flex-col justify-center items-center text-center px-4 pt-32 pb-20 relative animate-float">
+    <!-- Headline -->
+    <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+      <span class="block overflow-hidden pb-3">
+        <span class="reveal-text inline-block">
+          We grow brands through strategic social media management.
+        </span>
+      </span>
+    </h1>
+
+    <!-- Subheadline -->
+    <p class="text-xl md:text-2xl mt-1 mb-8 leading-relaxed max-w-3xl">
+      <span class="block overflow-hidden pb-2">
+        <span class="reveal-text inline-block delay-200">
+          Helping brands achieve faster, sustainable growth using proven social media strategies, automation workflows, and AI technology.
+        </span>
+      </span>
+    </p>
+
+    <!-- CTA Buttons -->
+    <div class="flex gap-6 flex-wrap justify-center">
+     <!-- Book a Free Strategy Call (Microsoft Teams) -->
+<a href="https://teams.live.com/meet/9314979560881?p=vLnClCGYnCj57llrXf"
+   target="_blank"
+   class="bg-[var(--accent)] px-8 py-3 rounded font-bold relative overflow-hidden ripple transform transition-transform duration-300 hover:scale-105 text-white">
+  Book a Free Strategy Call
+</a>
+
+<!-- Get a Free Audit (Google Form) -->
+<a href="https://forms.gle/3NAutdaMzMV4LeeS6"
+   target="_blank"
+   class="bg-[var(--accent)] px-8 py-3 rounded font-bold relative overflow-hidden ripple transform transition-transform duration-300 hover:scale-105 text-white">
+  Get a Free Audit
+</a>
+
+
+    </div>
+  </section>
+
+  <!-- ===== 2. ABOUT US ===== -->
+  <section id="about" class="py-20 px-4 max-w-5xl mx-auto text-center fade-section">
+
+    <h2 class="text-3xl md:text-4xl font-bold mb-6">About Us</h2>
+    <p class="mb-4">We help brands and creators grow their online presence through smart social media strategies.</p>
+    <p class="mb-4">Our mission is to deliver measurable growth with tailored solutions across content, AI tools, and automation.</p>
+    <p class="mb-4">We focus on transparency, data-driven results, and a client-first approach for every project.</p>
+    <p>Unlike traditional agencies, we combine strategy, creativity, and automation to maximize engagement and conversions efficiently.</p>
+  </section>
+
+  <!-- ===== 3. SERVICES ===== -->
+  <section id="services" class="py-20 px-4 max-w-6xl mx-auto text-center">
+    <h2 class="text-3xl md:text-4xl font-bold mb-12 animate-on-scroll" data-delay="0">Services</h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="bg-[#454545] p-6 rounded shadow hover:shadow-lg transition transform opacity-0 scale-95 animate-on-scroll" data-delay="100">
+        <h3 class="text-2xl font-bold mb-2">Profile Setup & Integration</h3>
+        <p class="mb-2">I will remove Instagram bots and ghost followers.</p>
+        <p class="mb-2">Perfect for cleaning up your social media accounts.</p>
+      </div>
+
+      <div class="bg-[#454545] p-6 rounded shadow hover:shadow-lg transition transform opacity-0 scale-95 animate-on-scroll" data-delay="200">
+        <h3 class="text-2xl font-bold mb-2">YouTube Channel Management</h3>
+        <p class="mb-2">I will create a cash cow YouTube automation channel with faceless videos.</p>
+        <p class="mb-2">Ideal for monetizing your channel efficiently.</p>
+      </div>
+
+      <div class="bg-[#454545] p-6 rounded shadow hover:shadow-lg transition transform opacity-0 scale-95 animate-on-scroll" data-delay="300">
+        <h3 class="text-2xl font-bold mb-2">Social Media Manager</h3>
+        <p class="mb-2">I manage your social media accounts for growth and engagement.</p>
+        <p class="mb-2">Ensures consistent posting, audience interaction, and brand presence.</p>
+      </div>
+
+      <div class="bg-[#454545] p-6 rounded shadow hover:shadow-lg transition transform opacity-0 scale-95 animate-on-scroll" data-delay="400">
+        <h3 class="text-2xl font-bold mb-2">Video Editor</h3>
+        <p class="mb-2">I create professional video edits for YouTube, Instagram, and TikTok.</p>
+        <p class="mb-2">Transforms raw footage into engaging, polished content.</p>
+      </div>
+
+      <div class="bg-[#454545] p-6 rounded shadow hover:shadow-lg transition transform opacity-0 scale-95 animate-on-scroll" data-delay="500">
+        <h3 class="text-2xl font-bold mb-2">Instagram & TikTok Growth Hacking</h3>
+        <p class="mb-2">Organic strategies to boost followers and engagement quickly.</p>
+        <p class="mb-2">Ideal for brands looking rapid social growth.</p>
+      </div>
+
+      <div class="bg-[#454545] p-6 rounded shadow hover:shadow-lg transition transform opacity-0 scale-95 animate-on-scroll" data-delay="600">
+        <h3 class="text-2xl font-bold mb-2">Reels & Shorts Creation</h3>
+        <p class="mb-2">High-converting short-form videos for TikTok, Instagram, and YouTube.</p>
+        <p class="mb-2">Boosts engagement and visibility for your brand.</p>
+      </div>
+
+      <div class="bg-[#454545] p-6 rounded shadow hover:shadow-lg transition transform opacity-0 scale-95 animate-on-scroll" data-delay="700">
+        <h3 class="text-2xl font-bold mb-2">Community Management</h3>
+        <p class="mb-2">Engaging your audience through comments, messages, and DMs.</p>
+        <p class="mb-2">Builds loyal followers and stronger brand relationships.</p>
+      </div>
+
+      <div class="bg-[#454545] p-6 rounded shadow hover:shadow-lg transition transform opacity-0 scale-95 animate-on-scroll" data-delay="800">
+        <h3 class="text-2xl font-bold mb-2">YouTube Thumbnail Design</h3>
+        <p class="mb-2">Eye-catching thumbnails to increase your video click-through rates.</p>
+        <p class="mb-2">Makes your videos stand out in search and recommendations.</p>
+      </div>
+
+      <div class="bg-[#454545] p-6 rounded shadow hover:shadow-lg transition transform opacity-0 scale-95 animate-on-scroll" data-delay="900">
+        <h3 class="text-2xl font-bold mb-2">Motion Graphics & Animation</h3>
+        <p class="mb-2">Short animations for social media posts and video ads.</p>
+        <p class="mb-2">Boosts engagement with dynamic visuals.</p>
+      </div>
+
+      <div class="bg-[#454545] p-6 rounded shadow hover:shadow-lg transition transform opacity-0 scale-95 animate-on-scroll" data-delay="1000">
+  <h3 class="text-2xl font-bold mb-2">Video Repurposing</h3>
+  <p class="mb-2">Convert long videos into short clips for Instagram, TikTok, and Shorts.</p>
+  <p class="mb-2">Maximizes your content’s reach and lifespan.</p>
+</div>
+
+<div class="bg-[#454545] p-6 rounded shadow hover:shadow-lg transition transform opacity-0 scale-95 animate-on-scroll" data-delay="1100">
+  <h3 class="text-2xl font-bold mb-2">Ad Copywriting</h3>
+  <p class="mb-2">High-converting ad scripts for Facebook, Instagram, or YouTube.</p>
+  <p class="mb-2">Helps brands attract customers and drive sales.</p>
+</div>
+
+<div class="bg-[#454545] p-6 rounded shadow hover:shadow-lg transition transform opacity-0 scale-95 animate-on-scroll" data-delay="1200">
+  <h3 class="text-2xl font-bold mb-2">Brand Storytelling</h3>
+  <p class="mb-2">Create a consistent voice and narrative for your brand.</p>
+  <p class="mb-2">Strengthens audience connection and trust.</p>
+</div>
+
+<div class="bg-[#454545] p-6 rounded shadow hover:shadow-lg transition transform opacity-0 scale-95 animate-on-scroll" data-delay="1300">
+  <h3 class="text-2xl font-bold mb-2">AI Image Generation</h3>
+  <p class="mb-2">Generate visuals with AI for posts, ads, or branding.</p>
+  <p class="mb-2">Save time and create unique graphics instantly.</p>
+</div>
+
+<div class="bg-[#454545] p-6 rounded shadow hover:shadow-lg transition transform opacity-0 scale-95 animate-on-scroll" data-delay="1400">
+  <h3 class="text-2xl font-bold mb-2">Voiceovers & Podcast Editing</h3>
+  <p class="mb-2">Professional human-like AI voiceovers and podcast edits.</p>
+  <p class="mb-2">Enhances audio content for videos and podcasts.</p>
+</div>
+
+<div class="bg-[#454545] p-6 rounded shadow hover:shadow-lg transition transform opacity-0 scale-95 animate-on-scroll" data-delay="1500">
+  <h3 class="text-2xl font-bold mb-2">Chatbot Setup</h3>
+  <p class="mb-2">AI-driven customer service bots for social media or websites.</p>
+  <p class="mb-2">Automates engagement and improves response times.</p>
+</div>
+    </div>
+  </section>
+
+  <!-- ===== 4. HOW IT WORKS ===== -->
+<section id="how-it-works" class="py-20 px-4 max-w-4xl mx-auto text-center fade-section">
+
+    <h2 class="text-3xl md:text-4xl font-bold mb-12">How It Works</h2>
+    <ol class="list-decimal list-inside space-y-6 text-left md:text-lg how-it-works-list">
+      <li>
+        <span class="font-semibold">Free Consultation:</span> We discuss your goals and analyze your social media presence to identify growth opportunities.
+      </li>
+      <li>
+        <span class="font-semibold">Strategy & Planning:</span> A custom plan is created covering social media management, video content, AI tools, and posting schedules.
+      </li>
+      <li>
+        <span class="font-semibold">Content Creation:</span> We produce high-quality content including posts, Reels, Shorts, scripts, and AI-generated visuals and voiceovers.
+      </li>
+      <li>
+        <span class="font-semibold">Publishing & Optimization:</span> Content is posted and optimized across platforms, while engagement and analytics are closely monitored.
+      </li>
+      <li>
+        <span class="font-semibold">Performance Reports:</span> Detailed monthly reports track follower growth, engagement, and conversions with actionable recommendations.
+      </li>
+    </ol>
+  </section>
+
+  <!-- ===== 5. PORTFOLIO ===== -->
+<section id="portfolio" class="py-20 px-4 max-w-6xl mx-auto text-center">
+  <h2 class="text-3xl md:text-4xl font-bold mb-12">Portfolio</h2>
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+    <!-- Project 1: Social Media Growth -->
+    <div class="bg-[#454545] p-6 rounded shadow hover:shadow-lg transition">
+      <div class="relative w-full pb-[56.25%] bg-gray-700 rounded mb-4 flex items-center justify-center">
+        <img src="project1.jpg" alt="Social Media Growth" class="absolute top-0 left-0 w-full h-full object-cover rounded">
+       
+      </div>
+      <p class="text-gray-300">Social Media Growth – 100% Follower Increase via Targeted Strategy</p>
+    </div>
+
+    <!-- Project 2: YouTube Content Creation -->
+    <div class="bg-[#454545] p-6 rounded shadow hover:shadow-lg transition">
+      <div class="relative w-full pb-[56.25%] bg-gray-700 rounded mb-4 flex items-center justify-center">
+        <img src="project2.jpg" alt="YouTube Content Creation" class="absolute top-0 left-0 w-full h-full object-cover rounded">
+       
+      </div>
+      <p class="text-gray-300">YouTube Content Creation – 3 Months of Engaging Travel Videos</p>
+    </div>
+
+    <!-- Project 3: AI Audiobook Creation -->
+    <div class="bg-[#454545] p-6 rounded shadow hover:shadow-lg transition">
+      <div class="relative w-full pb-[56.25%] bg-gray-700 rounded mb-4 flex items-center justify-center">
+        <img src="project3.jpg" alt="AI Audiobook Creation" class="absolute top-0 left-0 w-full h-full object-cover rounded">
+       
+      </div>
+      <p class="text-gray-300">AI Audiobook Creation – Transforming eBooks into Engaging Audio</p>
+    </div>
+
+  </div>
+</section>
+
+
+  <!-- ===== 6. TESTIMONIALS ===== -->
+  <section id="testimonials" class="py-20 px-4 max-w-6xl mx-auto text-center">
+    <h2 class="text-3xl md:text-4xl font-bold mb-12 animate-on-scroll" data-delay="0">Testimonials</h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="bg-[#454545] p-6 rounded shadow hover:shadow-lg transition text-left transform opacity-0 scale-95 animate-on-scroll" data-delay="100">
+        <div class="flex items-center mb-2">
+          <span class="text-yellow-400">★★★★★</span>
+          <span class="ml-2 font-bold">lucvalls, Spain</span>
         </div>
-    </section>
+        <p>"Es buenísimo trabajar con ella"</p>
+        <p class="mt-2 text-sm text-gray-300">3 weeks ago | Profile Setup & Integration | Up to $50</p>
+      </div>
 
-    <!-- SERVICES -->
-    <h2 class="section-title reveal">My <span>Services</span></h2>
-    <section id="services" class="services">
-
-        <div class="service-box reveal">
-            <h3>YouTube Automation</h3>
-            <p>Scriptwriting, thumbnails, editing, metadata optimization & full channel automation workflows.</p>
+      <div class="bg-[#454545] p-6 rounded shadow hover:shadow-lg transition text-left transform opacity-0 scale-95 animate-on-scroll" data-delay="200">
+        <div class="flex items-center mb-2">
+          <span class="text-yellow-400">★★★★★</span>
+          <span class="ml-2 font-bold">lucvalls, Spain</span>
         </div>
+        <p>"Working with Aqsa is always synonymous with guaranteed service and results."</p>
+        <p class="mt-2 text-sm text-gray-300">1 month ago | YouTube Channel Management | Up to $50</p>
+      </div>
 
-        <div class="service-box reveal">
-            <h3>AI Image Generation</h3>
-            <p>Premium AI artwork, 3D-style thumbnails, cinematic portraits, marketing visuals & branding assets.</p>
+      <div class="bg-[#454545] p-6 rounded shadow hover:shadow-lg transition text-left transform opacity-0 scale-95 animate-on-scroll" data-delay="300">
+        <div class="flex items-center mb-2">
+          <span class="text-yellow-400">★★★★★</span>
+          <span class="ml-2 font-bold">akbarhero, Canada</span>
         </div>
+        <p>"Good job Aqsa! Your attention to details and professionalism is highly appreciated. I wish you all the very best!"</p>
+        <p class="mt-2 text-sm text-gray-300">3 months ago | Text-to-speech | $50-$100</p>
+      </div>
 
-        <div class="service-box reveal">
-            <h3>Video Editing</h3>
-            <p>High-quality edits for YouTube, Shorts, TikTok, Reels, with effects, animations & sound design.</p>
+      <div class="bg-[#454545] p-6 rounded shadow hover:shadow-lg transition text-left transform opacity-0 scale-95 animate-on-scroll" data-delay="400">
+        <div class="flex items-center mb-2">
+          <span class="text-yellow-400">★★★★★</span>
+          <span class="ml-2 font-bold">iconicreview, US</span>
         </div>
+        <p>"Thank you for your kindness and your hard work. I will be back for more because of your professionalism."</p>
+        <p class="mt-2 text-sm text-gray-300">5 months ago | YouTube Channel Management | Up to $50</p>
+      </div>
 
-        <div class="service-box reveal">
-            <h3>Social Media Management</h3>
-            <p>Content planning, page growth, ad strategies & brand positioning across all major platforms.</p>
+      <div class="bg-[#454545] p-6 rounded shadow hover:shadow-lg transition text-left transform opacity-0 scale-95 animate-on-scroll" data-delay="500">
+        <div class="flex items-center mb-2">
+          <span class="text-yellow-400">★★★★★</span>
+          <span class="ml-2 font-bold">mark78439, Germany</span>
         </div>
+        <p>"so good and fast"</p>
+        <p class="mt-2 text-sm text-gray-300">6 months ago | Profile Setup & Integration | Up to $50</p>
+      </div>
 
-        <div class="service-box reveal">
-            <h3>AI Voiceover Services</h3>
-            <p>Natural, clean, AI-generated narrations for YouTube, ads, explainers & branding videos.</p>
+      <div class="bg-[#454545] p-6 rounded shadow hover:shadow-lg transition text-left transform opacity-0 scale-95 animate-on-scroll" data-delay="600">
+        <div class="flex items-center mb-2">
+          <span class="text-yellow-400">★★★★★</span>
+          <span class="ml-2 font-bold">kudashonhiwa1, UK</span>
         </div>
+        <p>"This Lady has made me Love this platform she is very Professional and helpful"</p>
+        <p class="mt-2 text-sm text-gray-300">6 months ago | YouTube Channel Management | Up to $50</p>
+      </div>
+<div class="bg-[#454545] p-6 rounded shadow hover:shadow-lg transition text-left transform opacity-0 scale-95 animate-on-scroll" data-delay="700">
+  <div class="flex items-center mb-2">
+    <span class="text-yellow-400">★★★★★</span>
+    <span class="ml-2 font-bold">mohamedlahkimbe, Morocco</span>
+  </div>
+  <p>"The best ever. Thanks a lot"</p>
+  <p class="mt-2 text-sm text-gray-300">6 months ago | YouTube Channel Management | Up to $50</p>
+</div>
 
-        <div class="service-box reveal">
-            <h3>Content Writing</h3>
-            <p>SEO blogs, scripts, product descriptions, captions & persuasive marketing copy.</p>
+<div class="bg-[#454545] p-6 rounded shadow hover:shadow-lg transition text-left transform opacity-0 scale-95 animate-on-scroll" data-delay="800">
+  <div class="flex items-center mb-2">
+    <span class="text-yellow-400">★★★★★</span>
+    <span class="ml-2 font-bold">jbags1275, UAE</span>
+  </div>
+  <p>
+    "Aqsa Zahid did FANTASTIC work, with a lot of attention to detail, deep strategic thinking,
+    and a richness about the task. Collaborating with her on messages was a delight."
+  </p>
+  <p class="mt-2 text-sm text-gray-300">1 year ago | YouTube Channel Management | $50–$100</p>
+</div>
+
+<div class="bg-[#454545] p-6 rounded shadow hover:shadow-lg transition text-left transform opacity-0 scale-95 animate-on-scroll" data-delay="900">
+  <div class="flex items-center mb-2">
+    <span class="text-yellow-400">★★★★★</span>
+    <span class="ml-2 font-bold">amatyleon, US</span>
+  </div>
+  <p>"Aqsa is the best. Great communication and very easy to work with. I highly recommend!"</p>
+  <p class="mt-2 text-sm text-gray-300">1 year ago | YouTube Channel Management | Up to $50</p>
+</div>
+    </div>
+  </section>
+
+  <!-- ===== 7. CONTACT ===== -->
+  <section id="contact" class="py-20 px-4 max-w-3xl mx-auto text-center">
+    <h2 class="text-3xl md:text-4xl font-bold mb-12">Get in Touch</h2>
+    <div class="grid md:grid-cols-2 gap-8">
+      <div class="bg-[#454545] rounded-xl p-8 flex flex-col items-center justify-center gap-4 shadow-lg transform transition duration-500 hover:scale-105 hover:shadow-2xl">
+        <div class="w-14 h-14 flex items-center justify-center bg-[#f5b027]/20 rounded-full transition-all duration-500 hover:bg-[#f5b027]/40 hover:animate-pulse">
+          <svg class="w-8 h-8 text-[#f5b027] transition-transform duration-500 hover:scale-125"
+            fill="none" stroke="currentColor" stroke-width="2"
+            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M3 8l9 6 9-6M4 6h16a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V7a1 1 0 011-1z" />
+          </svg>
         </div>
-    </section>
+        <h3 class="text-xl font-semibold text-white">Email</h3>
+        <p class="text-gray-300">Send me a message directly</p>
+        <button onclick="sendEmail()" class="mt-2 bg-[#f5b027] hover:bg-[#f5b027]/90 px-6 py-2 rounded font-bold text-white transition">
+          Send Email
+        </button>
+      </div>
 
-    <!-- EXPERIENCE -->
-    <h2 class="section-title reveal">My <span>Experience</span></h2>
-    <section id="experience" class="experience">
-
-        <div class="exp-card reveal">
-            <h4>DexAI – Internship Trainee</h4>
-            <span>Oct 2025 – Present</span>
-            <p>Working with AI automation tools and digital content optimization workflows.</p>
+      <div class="bg-[#454545] rounded-xl p-8 flex flex-col items-center justify-center gap-4 shadow-lg transform transition duration-500 hover:scale-105 hover:shadow-2xl">
+        <div class="w-14 h-14 flex items-center justify-center bg-[#f5b027]/20 rounded-full transition-all duration-500 hover:bg-[#f5b027]/40 hover:animate-pulse">
+          <svg class="w-8 h-8 text-[#f5b027] transition-transform duration-500 hover:scale-125"
+            fill="currentColor" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
+            <path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 01107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"/>
+          </svg>
         </div>
+        <h3 class="text-xl font-semibold text-white">LinkedIn</h3>
+        <p class="text-gray-300">Connect with me professionally</p>
+        <button onclick="openLinkedIn()" class="mt-2 bg-[#f5b027] hover:bg-[#f5b027]/90 px-6 py-2 rounded font-bold text-white transition">
+          View Profile
+        </button>
+      </div>
+    </div>
+  </section>
 
-        <div class="exp-card reveal">
-            <h4>Fiverr – Social Media Manager & Video Editor</h4>
-            <span>Mar 2023 – Present</span>
-            <p>Delivered 100+ projects involving ads, branding, editing, thumbnails & automation solutions.</p>
+  <!-- ===== 8. FAQ ===== -->
+ <section id="faq" class="py-20 px-4 max-w-4xl mx-auto text-center fade-section">
+
+    <h2 class="text-3xl md:text-4xl font-bold mb-12">FAQ</h2>
+    <div class="space-y-6 text-left">
+      <div>
+        <p><strong><span class="text-[#f5b027]">Q:</span></strong> How long does it take to grow my Instagram or YouTube channel?</p>
+        <p><strong>A:</strong> Initial engagement improvements are usually visible within 4–6 weeks. Significant growth typically occurs over 3–6 months with consistent strategy and quality content.</p>
+      </div>
+      
+      <div>
+        <p><strong><span class="text-[#f5b027]">Q:</span></strong> Can you manage both Instagram and YouTube for my brand?</p>
+        <p><strong>A:</strong> Yes, we provide full management for Instagram and YouTube, including content creation, posting schedules, SEO optimization, and engagement with your audience.</p>
+      </div>
+      
+      <div>
+        <p><strong><span class="text-[#f5b027]">Q:</span></strong> Do you create custom content for my niche?</p>
+        <p><strong>A:</strong> Absolutely. We research your industry and audience to produce engaging posts, reels, and videos tailored to your brand's style and goals.</p>
+      </div>
+      
+      <div>
+        <p><strong><span class="text-[#f5b027]">Q:</span></strong> What video editing services do you offer?</p>
+        <p><strong>A:</strong> We provide professional editing for YouTube videos, Instagram reels, promotional clips, and ads, including transitions, effects, subtitles, and thumbnails.</p>
+      </div>
+      
+      <div>
+        <p><strong><span class="text-[#f5b027]">Q:</span></strong> How do I get started with your services?</p>
+        <p><strong>A:</strong> Simply book a free strategy call or audit via our website. We'll create a custom plan for your Instagram and YouTube growth and content strategy.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 9. FOOTER ===== -->
+  <footer class="bg-[#343434] text-white py-10">
+    <div class="container mx-auto px-4 flex flex-col gap-8">
+      <div class="flex flex-col md:flex-row justify-center items-center gap-3">
+        <div class="text-2xl font-bold">
+          Aqsa Zahid<span class="text-[#f5b027]">.</span>
         </div>
-
-        <div class="exp-card reveal">
-            <h4>Desirotech – Social Media Manager</h4>
-            <span>2024 – 2025</span>
-            <p>Handled company-wide marketing campaigns, content creation & digital growth.</p>
+        
+        <div class="flex flex-col sm:flex-row gap-4 text-sm md:text-base">
+          <a href="#home" class="hover:text-[#f5b027] transition-colors">Home</a>
+          <a href="#about" class="hover:text-[#f5b027] transition-colors">About</a>
+          <a href="#services" class="hover:text-[#f5b027] transition-colors">Services</a>
+          <a href="#contact" class="hover:text-[#f5b027] transition-colors">Contact</a>
         </div>
+      </div>
 
-        <div class="exp-card reveal">
-            <h4>TenX – Marketing Manager</h4>
-            <span>2024</span>
-            <p>Managed digital marketing pipelines & led strategic brand positioning projects.</p>
-        </div>
-    </section>
+      <div class="text-center text-sm text-gray-400">
+        <p>&copy; <span id="currentYear"></span> Aqsa Zahid. All rights reserved.</p>
+        <p class="mt-1">
+          <a href="#" class="hover:text-[#f5b027] transition-colors">Privacy Policy</a> |
+          <a href="#" class="hover:text-[#f5b027] transition-colors">Terms</a>
+        </p>
+      </div>
+    </div>
+  </footer>
 
-    <!-- CONTACT -->
-    <section id="contact" class="contact reveal">
-        <h2 class="section-title">Let's <span>Work Together</span></h2>
-        <p>Have a project in mind? I can help bring it to life!</p>
-        <a href="mailto:mughal54225@gmail.com">Contact Me</a>
-    </section>
+  <!-- JavaScript -->
+<script>
+  /* ===== Scroll-triggered card animations (Services, Testimonials, etc.) ===== */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const delay = Number(entry.target.dataset.delay) || 0;
+        setTimeout(() => entry.target.classList.add('visible'), delay);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
 
-    <footer>
-        © 2025 Aqsa Zahid — All Rights Reserved.
-    </footer>
+  document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
 
-    <!-- JavaScript Scroll Animation -->
-    <script>
-        function revealElements() {
-            const reveals = document.querySelectorAll('.reveal');
-            for (let i = 0; i < reveals.length; i++) {
-                let windowHeight = window.innerHeight;
-                let revealTop = reveals[i].getBoundingClientRect().top;
-                let revealPoint = 100;
 
-                if (revealTop < windowHeight - revealPoint) {
-                    reveals[i].classList.add('active');
-                }
-            }
+  /* ===== Fade-up section animations (About, How It Works, FAQ) ===== */
+  const fadeObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          fadeObserver.unobserve(entry.target);
         }
+      });
+    },
+    { threshold: 0.15 }
+  );
 
-        window.addEventListener('scroll', revealElements);
-        revealElements();
-    </script>
+  document.querySelectorAll(".fade-section").forEach(section => {
+    fadeObserver.observe(section);
+  });
 
+
+  /* ===== Email function (Gmail open) ===== */
+  function sendEmail() {
+    const email = "azmughal5969@example.com";
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&to=${email}`;
+    window.open(gmailUrl, "_blank");
+  }
+
+
+  /* ===== LinkedIn function ===== */
+  function openLinkedIn() {
+    window.open("https://www.linkedin.com/in/aqsa-zahid-4a9099325/", "_blank");
+  }
+
+
+  /* ===== Set current year in footer ===== */
+  document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+
+  /* ===== Smooth scrolling for internal links ===== */
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href');
+      if (targetId === '#') return;
+
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        window.scrollTo({
+          top: targetElement.offsetTop - 80,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+</script>
 </body>
 </html>
+
