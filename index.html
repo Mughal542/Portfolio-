@@ -116,45 +116,55 @@
     </nav>
   </header>
 
-  <!-- ===== 1. HOME (First Impression) ===== -->
-  <section id="home" class="min-h-screen flex flex-col justify-center items-center text-center px-4 pt-32 pb-20 relative animate-float">
-    <!-- Headline -->
-    <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-      <span class="block overflow-hidden pb-3">
-        <span class="reveal-text inline-block">
-          We grow brands through strategic social media management.
-        </span>
+ <!-- ===== 1. HOME (First Impression) ===== -->
+<section id="home" class="min-h-screen flex flex-col justify-center items-start text-left pl-28 pr-8 pt-32 pb-20 relative animate-float overflow-hidden">
+
+  <!-- Background Image -->
+  <div class="absolute inset-0 -z-10">
+    <img src="bg.png" alt="Background" class="w-full h-full object-cover">
+    <!-- Optional: Add overlay for better text contrast -->
+    
+  </div>
+
+  <!-- Headline -->
+  <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight relative z-10">
+    <span class="block overflow-hidden pb-3">
+      <span class="reveal-text inline-block">
+        <p>We grow brands through strategic</p>
+        <p>social media management.</p>
       </span>
-    </h1>
+    </span>
+  </h1>
 
-    <!-- Subheadline -->
-    <p class="text-xl md:text-2xl mt-1 mb-8 leading-relaxed max-w-3xl">
-      <span class="block overflow-hidden pb-2">
-        <span class="reveal-text inline-block delay-200">
-          Helping brands achieve faster, sustainable growth using proven social media strategies, automation workflows, and AI technology.
-        </span>
+  <!-- Subheadline -->
+  <p class="text-xl md:text-2xl mt-1 mb-8 leading-relaxed max-w-3xl relative z-10">
+    <span class="block overflow-hidden pb-2">
+      <span class="reveal-text inline-block delay-200">
+        Helping brands achieve faster, sustainable growth using proven social media strategies, automation workflows, and AI technology.
       </span>
-    </p>
+    </span>
+  </p>
 
-    <!-- CTA Buttons -->
-    <div class="flex gap-6 flex-wrap justify-center">
-     <!-- Book a Free Strategy Call (Microsoft Teams) -->
-<a href="https://teams.live.com/meet/9314979560881?p=vLnClCGYnCj57llrXf"
-   target="_blank"
-   class="bg-[var(--accent)] px-8 py-3 rounded font-bold relative overflow-hidden ripple transform transition-transform duration-300 hover:scale-105 text-white">
-  Book a Free Strategy Call
-</a>
+  <!-- CTA Buttons -->
+  <div class="flex gap-6 flex-wrap justify-start ml-20 relative z-10">
+    <!-- Book a Free Strategy Call (Microsoft Teams) -->
+    <a href="https://teams.live.com/meet/9314979560881?p=vLnClCGYnCj57llrXf"
+       target="_blank"
+       class="bg-[var(--accent)] px-8 py-3 rounded font-bold relative overflow-hidden ripple transform transition-transform duration-300 hover:scale-105 text-white">
+      Book a Free Strategy Call
+    </a>
 
-<!-- Get a Free Audit (Google Form) -->
-<a href="https://forms.gle/3NAutdaMzMV4LeeS6"
-   target="_blank"
-   class="bg-[var(--accent)] px-8 py-3 rounded font-bold relative overflow-hidden ripple transform transition-transform duration-300 hover:scale-105 text-white">
-  Get a Free Audit
-</a>
+    <!-- Get a Free Audit (Google Form) -->
+    <a href="https://forms.gle/3NAutdaMzMV4LeeS6"
+       target="_blank"
+       class="bg-[var(--accent)] px-8 py-3 rounded font-bold relative overflow-hidden ripple transform transition-transform duration-300 hover:scale-105 text-white">
+      Get a Free Audit
+    </a>
+  </div>
+
+</section>
 
 
-    </div>
-  </section>
 
   <!-- ===== 2. ABOUT US ===== -->
   <section id="about" class="py-20 px-4 max-w-5xl mx-auto text-center fade-section">
@@ -575,4 +585,3 @@
 </script>
 </body>
 </html>
-
