@@ -15,27 +15,25 @@
   }
 
   /* ===== Masked Reveal Text Animation ===== */
-  .reveal-text {
-    display: inline-block;
-    transform: translateY(100%);
+ .reveal-text {
+  display: inline-block;
+  opacity: 0;
+  animation: fadeOnly 1s ease forwards;
+}
+
+.reveal-text.delay-200 {
+  animation-delay: 0.2s;
+}
+
+@keyframes fadeOnly {
+  from {
     opacity: 0;
-    animation: reveal 1s ease forwards;
   }
+  to {
+    opacity: 1;
+  }
+}
 
-  .reveal-text.delay-200 {
-    animation-delay: 0.2s;
-  }
-
-  @keyframes reveal {
-    0% {
-      transform: translateY(100%);
-      opacity: 0;
-    }
-    100% {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
 
   /* ===== Ripple Effect ===== */
   .ripple::after {
