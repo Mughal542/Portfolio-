@@ -95,6 +95,13 @@
   .how-it-works-list li::marker {
     color: #f5b027;
   }
+
+  @media (max-width: 640px) {
+  #home img {
+    object-position: top center;
+  }
+}
+
 </style>
 
 </head>
@@ -119,12 +126,15 @@
 <!-- ===== 1. HOME (First Impression) ===== -->
 <section
   id="home"
-  class="min-h-screen flex flex-col justify-center
-         relative overflow-hidden">
+  class="min-h-[100svh] sm:min-h-screen flex flex-col justify-center relative overflow-hidden">
+
 
   <!-- Background -->
   <div class="absolute inset-0 -z-10">
-    <img src="bg.png" alt="Background" class="w-full h-full object-cover">
+    <img src="bg.png"
+     alt="Background"
+     class="w-full h-full object-cover object-center">
+
   </div>
 
   <!-- Content Wrapper (this is the key) -->
@@ -176,7 +186,7 @@
   <!-- ===== 3. SERVICES ===== -->
   <section id="services" class="py-20 px-4 max-w-6xl mx-auto text-center">
     <h2 class="text-3xl md:text-4xl font-bold mb-12 animate-on-scroll" data-delay="0">Services</h2>
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
       <div class="bg-[#454545] p-6 rounded shadow hover:shadow-lg transition transform opacity-0 scale-95 animate-on-scroll" data-delay="100">
         <h3 class="text-2xl font-bold mb-2">Profile Setup & Integration</h3>
         <p class="mb-2">I will remove Instagram bots and ghost followers.</p>
@@ -295,7 +305,7 @@
   <!-- ===== 5. PORTFOLIO ===== -->
 <section id="portfolio" class="py-20 px-4 max-w-6xl mx-auto text-center">
   <h2 class="text-3xl md:text-4xl font-bold mb-12">Portfolio</h2>
-  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
 
     <!-- Project 1: Social Media Growth -->
     <div class="bg-[#454545] p-6 rounded shadow hover:shadow-lg transition">
@@ -331,7 +341,7 @@
   <!-- ===== 6. TESTIMONIALS ===== -->
   <section id="testimonials" class="py-20 px-4 max-w-6xl mx-auto text-center">
     <h2 class="text-3xl md:text-4xl font-bold mb-12 animate-on-scroll" data-delay="0">Testimonials</h2>
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
       <div class="bg-[#454545] p-6 rounded shadow hover:shadow-lg transition text-left transform opacity-0 scale-95 animate-on-scroll" data-delay="100">
         <div class="flex items-center mb-2">
           <span class="text-yellow-400">★★★★★</span>
