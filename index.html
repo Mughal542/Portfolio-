@@ -434,6 +434,78 @@
     </div>
   </section>
 
+ <!-- ===== REVIEWS / PROJECTS SECTION ===== -->
+<section id="stats" class="w-full py-16 relative"
+         style="background: linear-gradient(90deg, #f5b027, #f5b027, #f5b027);">
+  <div class="max-w-6xl mx-auto px-6 text-center grid grid-cols-1 sm:grid-cols-3 gap-8">
+    
+    <!-- Repeat Buyers -->
+    <div>
+      <h2 class="text-4xl font-bold text-[var(--text-color)] counter" data-target="100" data-suffix="%">0</h2>
+      <p class="text-lg text-gray-100 mt-2">Happy Clients</p>
+    </div>
+
+    <!-- Success Score -->
+    <div>
+      <h2 class="text-4xl font-bold text-[var(--text-color)] counter" data-target="95" data-suffix="%">0</h2>
+      <p class="text-lg text-gray-100 mt-2">Success Score</p>
+    </div>
+
+    <!-- Happy Clients -->
+    <div>
+      <h2 class="text-4xl font-bold text-[var(--text-color)] counter" data-target="98" data-suffix="%">0</h2>
+      <p class="text-lg text-gray-100 mt-2">Repeat Buyers</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== COUNT-UP SCRIPT ===== -->
+<script>
+  function animateCounters() {
+    const counters = document.querySelectorAll('.counter');
+    counters.forEach(counter => {
+      const target = +counter.getAttribute('data-target');
+      const suffix = counter.getAttribute('data-suffix') || '';
+      const duration = 4000; // 4 seconds
+      const startTime = performance.now();
+
+      const updateCount = (currentTime) => {
+        const elapsed = currentTime - startTime;
+        if(elapsed < duration) {
+          const progress = elapsed / duration;
+          const value = Math.ceil(progress * target);
+          counter.innerText = value + suffix;
+          requestAnimationFrame(updateCount);
+        } else {
+          counter.innerText = target + suffix;
+        }
+      };
+
+      requestAnimationFrame(updateCount);
+    });
+  }
+
+  function isInViewport(el) {
+    const rect = el.getBoundingClientRect();
+    return rect.top < window.innerHeight && rect.bottom >= 0;
+  }
+
+  let animated = false;
+  window.addEventListener('scroll', () => {
+    const section = document.getElementById('stats');
+    if(!animated && isInViewport(section)) {
+      animateCounters();
+      animated = true;
+    }
+  });
+</script>
+
+
+
+
+
+
   <!-- ===== 7. CONTACT ===== -->
   <section id="contact" class="py-20 px-4 max-w-3xl mx-auto text-center">
     <h2 class="text-3xl md:text-4xl font-bold mb-12">Get in Touch</h2>
