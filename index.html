@@ -4,671 +4,1017 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Aqsa Zahid - Social Media & AI Services</title>
-  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
- <style>
-  /* Custom Tailwind Colors */
-  :root {
-    --primary-bg: #343434;
-    --accent: #f5b027;
-    --text-color: #ffffff;
-  }
-
-  /* ===== Masked Reveal Text Animation ===== */
- .reveal-text {
-  display: inline-block;
-  opacity: 0;
-  animation: fadeOnly 1s ease forwards;
-}
-
-.reveal-text.delay-200 {
-  animation-delay: 0.2s;
-}
-
-@keyframes fadeOnly {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-
-  /* ===== Ripple Effect ===== */
-  .ripple::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: inherit;
-    transform: scale(0);
-    opacity: 0;
-    transition: transform 0.5s, opacity 1s;
-  }
-
-  .ripple:active::after {
-    transform: scale(2);
-    opacity: 1;
-    transition: 0s;
-  }
-
-  /* ===== Floating Motion ===== */
-  @keyframes float {
-    0%, 100% {
-      transform: translateY(0);
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --accent: #f5b027;
+      --accent-dim: rgba(245, 176, 39, 0.15);
+      --accent-glow: rgba(245, 176, 39, 0.3);
+      --bg-dark: #0d0d0f;
+      --bg-card: rgba(255,255,255,0.04);
+      --bg-card-hover: rgba(255,255,255,0.07);
+      --border: rgba(255,255,255,0.08);
+      --border-accent: rgba(245, 176, 39, 0.3);
     }
-    50% {
-      transform: translateY(-10px);
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-dark);
+      color: #e2e8f0;
+      overflow-x: hidden;
     }
-  }
 
-  .animate-float {
-    animation: float 4s ease-in-out infinite;
-  }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(245,176,39,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 80%, rgba(245,176,39,0.06) 0%, transparent 50%),
+        linear-gradient(180deg, #0d0d0f 0%, #111116 100%);
+    }
 
-  /* ===== Scroll Animation (Cards, Grid Items) ===== */
-  .animate-on-scroll {
-    opacity: 0;
-    transform: translateY(20px) scale(0.95);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
+    .hero-wave {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      z-index: 1;
+      opacity: 0.35;
+    }
 
-  .animate-on-scroll.visible {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+    .glass-nav {
+      background: rgba(13,13,15,0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
 
-  /* ===== Professional Fade-Up Animation (Sections) ===== */
-  .fade-section {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
+    .btn-primary {
+      background: var(--accent);
+      color: #0d0d0f;
+      font-weight: 700;
+      padding: 0.75rem 1.75rem;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 20px rgba(245,176,39,0.25);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-primary:hover {
+      background: #ffbf38;
+      box-shadow: 0 0 35px rgba(245,176,39,0.5);
+      transform: translateY(-1px);
+    }
 
-  .fade-section.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    .btn-outline {
+      background: transparent;
+      color: #e2e8f0;
+      font-weight: 600;
+      padding: 0.75rem 1.75rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-dim);
+    }
 
-  /* ===== How It Works List Styling ===== */
-  .how-it-works-list li::marker {
-    color: #f5b027;
-  }
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--accent-dim);
+      border: 1px solid var(--border-accent);
+      border-radius: 999px;
+      padding: 0.3rem 1rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+    .badge-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.7); }
+    }
 
-  @media (max-width: 640px) {
-  #home img {
-    object-position: top center;
-  }
-}
+    .glass-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      transition: all 0.35s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(245,176,39,0.04), transparent);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+    .glass-card:hover {
+      border-color: var(--border-accent);
+      background: var(--bg-card-hover);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(245,176,39,0.1);
+    }
+    .glass-card:hover::before { opacity: 1; }
 
-</style>
+    /* ── SVG Icon styles ── */
+    .service-icon {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      background: var(--accent-dim);
+      border: 1px solid var(--border-accent);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1rem;
+      transition: all 0.3s ease;
+    }
+    .service-icon svg {
+      width: 24px; height: 24px;
+      color: var(--accent);
+      filter: drop-shadow(0 0 6px rgba(245,176,39,0.55));
+      transition: filter 0.3s ease;
+    }
+    .glass-card:hover .service-icon {
+      border-color: rgba(245,176,39,0.55);
+      background: rgba(245,176,39,0.2);
+    }
+    .glass-card:hover .service-icon svg {
+      filter: drop-shadow(0 0 10px rgba(245,176,39,0.9));
+    }
 
+    /* About mini icons */
+    .about-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: var(--accent-dim);
+      border: 1px solid var(--border-accent);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 0.6rem;
+      transition: all 0.3s ease;
+    }
+    .about-icon svg {
+      width: 22px; height: 22px;
+      color: var(--accent);
+      filter: drop-shadow(0 0 5px rgba(245,176,39,0.5));
+    }
+    .glass-card:hover .about-icon svg {
+      filter: drop-shadow(0 0 9px rgba(245,176,39,0.85));
+    }
+
+    .stats-band {
+      background: linear-gradient(90deg, rgba(245,176,39,0.08), rgba(245,176,39,0.15), rgba(245,176,39,0.08));
+      border-top: 1px solid var(--border-accent);
+      border-bottom: 1px solid var(--border-accent);
+    }
+
+    .section-heading {
+      display: inline-block;
+      position: relative;
+    }
+    .section-heading::after {
+      content: '';
+      position: absolute;
+      bottom: -8px; left: 0;
+      width: 48px; height: 3px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    .testimonial-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+    }
+    .testimonial-card:hover {
+      border-color: var(--border-accent);
+      transform: translateY(-3px);
+    }
+
+    .faq-item {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+    .faq-item.open { border-color: var(--border-accent); }
+    .faq-question {
+      width: 100%;
+      text-align: left;
+      padding: 1.25rem 1.5rem;
+      background: var(--bg-card);
+      color: #e2e8f0;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .faq-question:hover { background: var(--bg-card-hover); }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s;
+      background: rgba(245,176,39,0.02);
+      color: #94a3b8;
+      padding: 0 1.5rem;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    .faq-item.open .faq-answer {
+      max-height: 200px;
+      padding: 1rem 1.5rem 1.25rem;
+    }
+    .faq-chevron { transition: transform 0.3s; color: var(--accent); }
+    .faq-item.open .faq-chevron { transform: rotate(180deg); }
+
+    .logos-strip {
+      display: flex;
+      gap: 2.5rem;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      opacity: 0.5;
+      filter: grayscale(1);
+    }
+    .logos-strip span {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: #e2e8f0;
+    }
+
+    .timeline-step {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      position: relative;
+    }
+    .timeline-step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 23px; top: 48px;
+      width: 2px;
+      height: calc(100% + 1.5rem);
+      background: linear-gradient(180deg, var(--border-accent), transparent);
+    }
+    .step-num {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      border: 2px solid var(--border-accent);
+      background: var(--accent-dim);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800;
+      color: var(--accent);
+      flex-shrink: 0;
+      font-size: 1rem;
+    }
+
+    .contact-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2.5rem;
+      transition: all 0.3s;
+    }
+    .contact-card:hover {
+      border-color: var(--border-accent);
+      box-shadow: 0 0 30px rgba(245,176,39,0.08);
+    }
+    .contact-icon {
+      width: 60px; height: 60px;
+      border-radius: 16px;
+      background: var(--accent-dim);
+      border: 1px solid var(--border-accent);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.25rem;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      background: #0a0a0c;
+    }
+
+    .grid-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+    }
+
+    @keyframes countUp { from { opacity:0; } to { opacity:1; } }
+  </style>
 </head>
 
-<body class="bg-[var(--primary-bg)] text-[var(--text-color)] font-sans">
-  
-  <!-- ===== HEADER + NAVIGATION ===== -->
-  <header class="w-full fixed top-0 left-0 z-50 bg-[var(--primary-bg)] px-6 py-4 flex justify-between items-center shadow-md">
-    <!-- Logo / Brand -->
-    <div class="text-2xl font-bold text-[var(--text-color)]">
-      Aqsa Zahid<span class="text-[#f5b027]">.</span>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<header class="glass-nav fixed top-0 left-0 right-0 z-50">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+    <div class="text-xl font-bold text-white">
+      AqsaZahid</span><span style="color:var(--accent)">.</span>
     </div>
-   <!-- Navigation Links (if wanna add) -->
-    <nav class="flex gap-6 text-[var(--text-color)] font-bold text-lg">
-
-      
-
-      <p>100% client satisfaction &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p> 
-    </nav>
-  </header>
-
-<!-- ===== 1. HOME (First Impression) ===== -->
-<section
-  id="home"
-  class="min-h-[100svh] sm:min-h-screen flex flex-col justify-center relative overflow-hidden">
-
-
-  <!-- Background -->
-  <div class="absolute inset-0 -z-10">
-    <img src="bg.png"
-     alt="Background"
-     class="w-full h-full object-cover object-center">
-
+    <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-400">
+      <a href="#about" class="hover:text-white transition">About</a>
+      <a href="#services" class="hover:text-white transition">Services</a>
+      <a href="#portfolio" class="hover:text-white transition">Portfolio</a>
+      <a href="#testimonials" class="hover:text-white transition">Reviews</a>
+      <a href="#contact" class="hover:text-white transition">Contact</a>
+    </div>
+    <div class="flex items-center gap-2 text-sm font-semibold" style="color:var(--accent)">
+      <span class="w-2 h-2 rounded-full bg-green-400 inline-block"></span>
+      100% Client Satisfaction
+    </div>
   </div>
+</header>
 
-  <!-- Content Wrapper (this is the key) -->
-  <div class="max-w-6xl mx-auto px-6 text-left animate-float">
+<!-- ===== HERO ===== -->
+<section id="home" class="relative min-h-screen flex flex-col justify-center pt-24 pb-20 overflow-hidden">
+  <div class="hero-bg"></div>
+  <div class="grid-overlay"></div>
+  <div style="position:absolute;top:20%;right:10%;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(245,176,39,0.08) 0%,transparent 70%);pointer-events:none;z-index:1;"></div>
 
-    <!-- Headline -->
-    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-      <span class="reveal-text block">
-        <p>We grow brands through strategic</p>
-        <p>social media management.</p>
-      </span>
+  <div class="relative z-10 max-w-7xl mx-auto px-6 text-center">
+    <div class="badge-pill">
+      <span class="badge-dot"></span>
+      Introducing AI-Powered Growth
+      <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+    </div>
+
+    <h1 class="text-5xl sm:text-6xl lg:text-7xl font-black leading-tight text-white mb-6" style="letter-spacing:-0.03em;">
+      We Grow Brands Through<br>
+      <span style="color:var(--accent);">Strategic</span> Social Media
     </h1>
 
-    <!-- Subheadline -->
-    <p class="text-xl sm:text-2xl mb-8 max-w-3xl">
-      <span class="reveal-text delay-200 block">
-        Helping brands achieve faster, sustainable growth using proven social media strategies, automation workflows, and AI technology.
-      </span>
+    <p class="text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+      Helping brands achieve faster, sustainable growth using proven social media strategies, automation workflows, and AI technology.
     </p>
 
-    <!-- CTA -->
-    <div class="flex gap-4 flex-wrap">
-      <a href="https://teams.live.com/meet/9314979560881?p=vLnClCGYnCj57llrXf"
-         target="_blank"
-         class="bg-[var(--accent)] px-8 py-3 rounded font-bold ripple hover:scale-105 transition text-white">
+    <div class="flex flex-wrap gap-4 justify-center">
+      <a href="https://teams.live.com/meet/9314979560881?p=vLnClCGYnCj57llrXf" target="_blank" class="btn-primary">
         Book a Free Strategy Call
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
       </a>
-
-      <a href="https://forms.gle/3NAutdaMzMV4LeeS6"
-         target="_blank"
-         class="bg-[var(--accent)] px-8 py-3 rounded font-bold ripple hover:scale-105 transition text-white">
+      <a href="https://forms.gle/3NAutdaMzMV4LeeS6" target="_blank" class="btn-outline">
         Get a Free Audit
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
       </a>
     </div>
 
+    <div class="mt-20">
+      <p class="text-xs font-semibold tracking-widest text-slate-600 uppercase mb-6">Trusted by clients from</p>
+      <div class="logos-strip">
+        <span>🇪🇸 Spain</span>
+        <span>🇨🇦 Canada</span>
+        <span>🇺🇸 United States</span>
+        <span>🇩🇪 Germany</span>
+        <span>🇦🇪 UAE</span>
+        <span>🇬🇧 United Kingdom</span>
+        <span>🇲🇦 Morocco</span>
+      </div>
+    </div>
   </div>
+
+  <svg class="hero-wave" viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 60C240 100 480 20 720 60C960 100 1200 20 1440 60V120H0V60Z" fill="rgba(245,176,39,0.04)"/>
+  </svg>
 </section>
 
-  <!-- ===== 2. ABOUT US ===== -->
-  <section id="about" class="py-20 px-4 max-w-5xl mx-auto text-center fade-section">
-
-    <h2 class="text-3xl md:text-4xl font-bold mb-6">About Us</h2>
-    <p class="mb-4">We help brands and creators grow their online presence through smart social media strategies.</p>
-    <p class="mb-4">Our mission is to deliver measurable growth with tailored solutions across content, AI tools, and automation.</p>
-    <p class="mb-4">We focus on transparency, data-driven results, and a client-first approach for every project.</p>
-    <p>Unlike traditional agencies, we combine strategy, creativity, and automation to maximize engagement and conversions efficiently.</p>
-  </section>
-
-  <!-- ===== 3. SERVICES ===== -->
-<section id="services" class="py-20 px-4 max-w-6xl mx-auto text-center">
-<h2 class="text-3xl md:text-4xl font-bold mb-12 animate-on-scroll" data-delay="0">Services</h2>
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-<div class="bg-transparent border border-[#f5b027] p-6 rounded shadow hover:shadow-lg transition transform opacity-0 scale-95 animate-on-scroll" data-delay="100">
-
-<h3 class="text-2xl font-bold mb-2">Profile Setup & Integration</h3>
-<p class="mb-2">I will remove Instagram bots and ghost followers.</p>
-<p class="mb-2">Perfect for cleaning up your social media accounts.</p>
-</div>
-
-<div class="bg-transparent border border-[#f5b027] p-6 rounded shadow hover:shadow-lg transition transform opacity-0 scale-95 animate-on-scroll" data-delay="100">
-
-<h3 class="text-2xl font-bold mb-2">YouTube Channel Management</h3>
-<p class="mb-2">I will create a cash cow YouTube automation channel with faceless videos.</p>
-<p class="mb-2">Ideal for monetizing your channel efficiently.</p>
-</div>
-
-<div class="bg-transparent border border-[#f5b027] p-6 rounded shadow hover:shadow-lg transition transform opacity-0 scale-95 animate-on-scroll" data-delay="100">
-
-<h3 class="text-2xl font-bold mb-2">Social Media Manager</h3>
-<p class="mb-2">I manage your social media accounts for growth and engagement.</p>
-<p class="mb-2">Ensures consistent posting, audience interaction, and brand presence.</p>
-</div>
-
-<div class="bg-transparent border border-[#f5b027] p-6 rounded shadow hover:shadow-lg transition transform opacity-0 scale-95 animate-on-scroll" data-delay="100">
-<h3 class="text-2xl font-bold mb-2">Video Editor</h3> <p class="mb-2">I create professional video edits for YouTube, Instagram, and TikTok.</p>
-<p class="mb-2">Transforms raw footage into engaging, polished content.</p>
-</div>
-
-<div class="bg-transparent border border-[#f5b027] p-6 rounded shadow hover:shadow-lg transition transform opacity-0 scale-95 animate-on-scroll" data-delay="100">
-
-<h3 class="text-2xl font-bold mb-2">Instagram & TikTok Growth Hacking</h3>
-<p class="mb-2">Organic strategies to boost followers and engagement quickly.</p>
-<p class="mb-2">Ideal for brands looking rapid social growth.</p>
-</div>
-
-<div class="bg-transparent border border-[#f5b027] p-6 rounded shadow hover:shadow-lg transition transform opacity-0 scale-95 animate-on-scroll" data-delay="100">
-
-<h3 class="text-2xl font-bold mb-2">Reels & Shorts Creation</h3>
-<p class="mb-2">High-converting short-form videos for TikTok, Instagram, and YouTube.</p>
-<p class="mb-2">Boosts engagement and visibility for your brand.</p>
-</div>
-
-<div class="bg-transparent border border-[#f5b027] p-6 rounded shadow hover:shadow-lg transition transform opacity-0 scale-95 animate-on-scroll" data-delay="100">
-
-<h3 class="text-2xl font-bold mb-2">Community Management</h3>
-<p class="mb-2">Engaging your audience through comments, messages, and DMs.</p>
-<p class="mb-2">Builds loyal followers and stronger brand relationships.</p>
-</div>
-
-<div class="bg-transparent border border-[#f5b027] p-6 rounded shadow hover:shadow-lg transition transform opacity-0 scale-95 animate-on-scroll" data-delay="100">
-<h3 class="text-2xl font-bold mb-2">YouTube Thumbnail Design</h3> <p class="mb-2">Eye-catching thumbnails to increase your video click-through rates.</p>
-<p class="mb-2">Makes your videos stand out in search and recommendations.</p>
-</div>
-
-<div class="bg-transparent border border-[#f5b027] p-6 rounded shadow hover:shadow-lg transition transform opacity-0 scale-95 animate-on-scroll" data-delay="100">
-
-<h3 class="text-2xl font-bold mb-2">Motion Graphics & Animation</h3>
-<p class="mb-2">Short animations for social media posts and video ads.</p>
-<p class="mb-2">Boosts engagement with dynamic visuals.</p>
-</div>
-
-<div class="bg-transparent border border-[#f5b027] p-6 rounded shadow hover:shadow-lg transition transform opacity-0 scale-95 animate-on-scroll" data-delay="100">
-
-<h3 class="text-2xl font-bold mb-2">Video Repurposing</h3>
-<p class="mb-2">Convert long videos into short clips for Instagram, TikTok, and Shorts.</p>
-<p class="mb-2">Maximizes your content’s reach and lifespan.</p>
-</div>
-
-<div class="bg-transparent border border-[#f5b027] p-6 rounded shadow hover:shadow-lg transition transform opacity-0 scale-95 animate-on-scroll" data-delay="100">
-
-<h3 class="text-2xl font-bold mb-2">Ad Copywriting</h3>
-<p class="mb-2">High-converting ad scripts for Facebook, Instagram, or YouTube.</p>
-<p class="mb-2">Helps brands attract customers and drive sales.</p>
-</div>
-
-<div class="bg-transparent border border-[#f5b027] p-6 rounded shadow hover:shadow-lg transition transform opacity-0 scale-95 animate-on-scroll" data-delay="100">
-<h3 class="text-2xl font-bold mb-2">Brand Storytelling</h3> <p class="mb-2">Create a consistent voice and narrative for your brand.</p>
-<p class="mb-2">Strengthens audience connection and trust.</p>
-</div>
-
-<div class="bg-transparent border border-[#f5b027] p-6 rounded shadow hover:shadow-lg transition transform opacity-0 scale-95 animate-on-scroll" data-delay="100">
-
-<h3 class="text-2xl font-bold mb-2">AI Image Generation</h3>
-<p class="mb-2">Generate visuals with AI for posts, ads, or branding.</p>
-<p class="mb-2">Save time and create unique graphics instantly.</p>
-</div>
-
-<div class="bg-transparent border border-[#f5b027] p-6 rounded shadow hover:shadow-lg transition transform opacity-0 scale-95 animate-on-scroll" data-delay="100">
-
-<h3 class="text-2xl font-bold mb-2">Voiceovers & Podcast Editing</h3>
-<p class="mb-2">Professional human-like AI voiceovers and podcast edits.</p>
-<p class="mb-2">Enhances audio content for videos and podcasts.</p>
-</div>
-
-<div class="bg-transparent border border-[#f5b027] p-6 rounded shadow hover:shadow-lg transition transform opacity-0 scale-95 animate-on-scroll" data-delay="100">
-<h3 class="text-2xl font-bold mb-2">Chatbot Setup</h3> <p class="mb-2">AI-driven customer service bots for social media or websites.</p>
-<p class="mb-2">Automates engagement and improves response times.</p>
-</div>
-</div>
-</section>
-
-  <!-- ===== 4. HOW IT WORKS ===== -->
-<section id="how-it-works" class="py-20 px-4 max-w-4xl mx-auto text-center fade-section">
-
-    <h2 class="text-3xl md:text-4xl font-bold mb-12">How It Works</h2>
-    <ol class="list-decimal list-inside space-y-6 text-left md:text-lg how-it-works-list">
-      <li>
-        <span class="font-semibold">Free Consultation:</span> We discuss your goals and analyze your social media presence to identify growth opportunities.
-      </li>
-      <li>
-        <span class="font-semibold">Strategy & Planning:</span> A custom plan is created covering social media management, video content, AI tools, and posting schedules.
-      </li>
-      <li>
-        <span class="font-semibold">Content Creation:</span> We produce high-quality content including posts, Reels, Shorts, scripts, and AI-generated visuals and voiceovers.
-      </li>
-      <li>
-        <span class="font-semibold">Publishing & Optimization:</span> Content is posted and optimized across platforms, while engagement and analytics are closely monitored.
-      </li>
-      <li>
-        <span class="font-semibold">Performance Reports:</span> Detailed monthly reports track follower growth, engagement, and conversions with actionable recommendations.
-      </li>
-    </ol>
-  </section>
-
-  <!-- ===== 5. PORTFOLIO ===== -->
-<section id="portfolio" class="py-20 px-4 max-w-6xl mx-auto text-center">
-  <h2 class="text-3xl md:text-4xl font-bold mb-12">Portfolio</h2>
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-
-    <!-- Project 1: Social Media Growth -->
-    <div class="bg-[#454545] p-6 rounded shadow hover:shadow-lg transition">
-      <div class="relative w-full pb-[56.25%] bg-gray-700 rounded mb-4 flex items-center justify-center">
-        <img src="project1.jpg" alt="Social Media Growth" class="absolute top-0 left-0 w-full h-full object-cover rounded">
-       
-      </div>
-      <p class="text-gray-300">Social Media Growth – 100% Follower Increase via Targeted Strategy</p>
-    </div>
-
-    <!-- Project 2: YouTube Content Creation -->
-    <div class="bg-[#454545] p-6 rounded shadow hover:shadow-lg transition">
-      <div class="relative w-full pb-[56.25%] bg-gray-700 rounded mb-4 flex items-center justify-center">
-        <img src="project2.jpg" alt="YouTube Content Creation" class="absolute top-0 left-0 w-full h-full object-cover rounded">
-       
-      </div>
-      <p class="text-gray-300">YouTube Content Creation – 3 Months of Engaging Travel Videos</p>
-    </div>
-
-    <!-- Project 3: AI Audiobook Creation -->
-    <div class="bg-[#454545] p-6 rounded shadow hover:shadow-lg transition">
-      <div class="relative w-full pb-[56.25%] bg-gray-700 rounded mb-4 flex items-center justify-center">
-        <img src="project3.jpg" alt="AI Audiobook Creation" class="absolute top-0 left-0 w-full h-full object-cover rounded">
-       
-      </div>
-      <p class="text-gray-300">AI Audiobook Creation – Transforming eBooks into Engaging Audio</p>
-    </div>
-
-  </div>
-</section>
-
-
-  <!-- ===== 6. TESTIMONIALS ===== -->
-  <section id="testimonials" class="py-20 px-4 max-w-6xl mx-auto text-center">
-    <h2 class="text-3xl md:text-4xl font-bold mb-12 animate-on-scroll" data-delay="0">Testimonials</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-      <div class="bg-[#454545] p-6 rounded shadow hover:shadow-lg transition text-left transform opacity-0 scale-95 animate-on-scroll" data-delay="100">
-        <div class="flex items-center mb-2">
-          <span class="text-yellow-400">★★★★★</span>
-          <span class="ml-2 font-bold">lucvalls, Spain</span>
-        </div>
-        <p>"Es buenísimo trabajar con ella"</p>
-        <p class="mt-2 text-sm text-gray-300">3 weeks ago | Profile Setup & Integration | Up to $50</p>
-      </div>
-
-      <div class="bg-[#454545] p-6 rounded shadow hover:shadow-lg transition text-left transform opacity-0 scale-95 animate-on-scroll" data-delay="200">
-        <div class="flex items-center mb-2">
-          <span class="text-yellow-400">★★★★★</span>
-          <span class="ml-2 font-bold">lucvalls, Spain</span>
-        </div>
-        <p>"Working with Aqsa is always synonymous with guaranteed service and results."</p>
-        <p class="mt-2 text-sm text-gray-300">1 month ago | YouTube Channel Management | Up to $50</p>
-      </div>
-
-      <div class="bg-[#454545] p-6 rounded shadow hover:shadow-lg transition text-left transform opacity-0 scale-95 animate-on-scroll" data-delay="300">
-        <div class="flex items-center mb-2">
-          <span class="text-yellow-400">★★★★★</span>
-          <span class="ml-2 font-bold">akbarhero, Canada</span>
-        </div>
-        <p>"Good job Aqsa! Your attention to details and professionalism is highly appreciated. I wish you all the very best!"</p>
-        <p class="mt-2 text-sm text-gray-300">3 months ago | Text-to-speech | $50-$100</p>
-      </div>
-
-      <div class="bg-[#454545] p-6 rounded shadow hover:shadow-lg transition text-left transform opacity-0 scale-95 animate-on-scroll" data-delay="400">
-        <div class="flex items-center mb-2">
-          <span class="text-yellow-400">★★★★★</span>
-          <span class="ml-2 font-bold">iconicreview, US</span>
-        </div>
-        <p>"Thank you for your kindness and your hard work. I will be back for more because of your professionalism."</p>
-        <p class="mt-2 text-sm text-gray-300">5 months ago | YouTube Channel Management | Up to $50</p>
-      </div>
-
-      <div class="bg-[#454545] p-6 rounded shadow hover:shadow-lg transition text-left transform opacity-0 scale-95 animate-on-scroll" data-delay="500">
-        <div class="flex items-center mb-2">
-          <span class="text-yellow-400">★★★★★</span>
-          <span class="ml-2 font-bold">mark78439, Germany</span>
-        </div>
-        <p>"so good and fast"</p>
-        <p class="mt-2 text-sm text-gray-300">6 months ago | Profile Setup & Integration | Up to $50</p>
-      </div>
-
-      <div class="bg-[#454545] p-6 rounded shadow hover:shadow-lg transition text-left transform opacity-0 scale-95 animate-on-scroll" data-delay="600">
-        <div class="flex items-center mb-2">
-          <span class="text-yellow-400">★★★★★</span>
-          <span class="ml-2 font-bold">kudashonhiwa1, UK</span>
-        </div>
-        <p>"This Lady has made me Love this platform she is very Professional and helpful"</p>
-        <p class="mt-2 text-sm text-gray-300">6 months ago | YouTube Channel Management | Up to $50</p>
-      </div>
-<div class="bg-[#454545] p-6 rounded shadow hover:shadow-lg transition text-left transform opacity-0 scale-95 animate-on-scroll" data-delay="700">
-  <div class="flex items-center mb-2">
-    <span class="text-yellow-400">★★★★★</span>
-    <span class="ml-2 font-bold">mohamedlahkimbe, Morocco</span>
-  </div>
-  <p>"The best ever. Thanks a lot"</p>
-  <p class="mt-2 text-sm text-gray-300">6 months ago | YouTube Channel Management | Up to $50</p>
-</div>
-
-<div class="bg-[#454545] p-6 rounded shadow hover:shadow-lg transition text-left transform opacity-0 scale-95 animate-on-scroll" data-delay="800">
-  <div class="flex items-center mb-2">
-    <span class="text-yellow-400">★★★★★</span>
-    <span class="ml-2 font-bold">jbags1275, UAE</span>
-  </div>
-  <p>
-    "Aqsa Zahid did FANTASTIC work, with a lot of attention to detail, deep strategic thinking,
-    and a richness about the task. Collaborating with her on messages was a delight."
-  </p>
-  <p class="mt-2 text-sm text-gray-300">1 year ago | YouTube Channel Management | $50–$100</p>
-</div>
-
-<div class="bg-[#454545] p-6 rounded shadow hover:shadow-lg transition text-left transform opacity-0 scale-95 animate-on-scroll" data-delay="900">
-  <div class="flex items-center mb-2">
-    <span class="text-yellow-400">★★★★★</span>
-    <span class="ml-2 font-bold">amatyleon, US</span>
-  </div>
-  <p>"Aqsa is the best. Great communication and very easy to work with. I highly recommend!"</p>
-  <p class="mt-2 text-sm text-gray-300">1 year ago | YouTube Channel Management | Up to $50</p>
-</div>
-    </div>
-  </section>
-
- <!-- ===== REVIEWS / PROJECTS SECTION ===== -->
-<section id="stats" class="w-full py-16 relative"
-         style="background: linear-gradient(90deg, #f5b027, #f5b027, #f5b027);">
-  <div class="max-w-6xl mx-auto px-6 text-center grid grid-cols-1 sm:grid-cols-3 gap-8">
-    
-    <!-- Repeat Buyers -->
+<!-- ===== STATS BAND ===== -->
+<section class="stats-band py-14">
+  <div class="max-w-5xl mx-auto px-6 grid grid-cols-3 gap-8 text-center">
     <div>
-      <h2 class="text-4xl font-bold text-[var(--text-color)] counter" data-target="100" data-suffix="%">0</h2>
-      <p class="text-lg text-gray-100 mt-2">Happy Clients</p>
+      <div class="text-4xl sm:text-5xl font-black text-white counter" data-target="100" data-suffix="%">0%</div>
+      <p class="text-slate-400 mt-2 text-sm font-medium">Happy Clients</p>
     </div>
-
-    <!-- Success Score -->
     <div>
-      <h2 class="text-4xl font-bold text-[var(--text-color)] counter" data-target="95" data-suffix="%">0</h2>
-      <p class="text-lg text-gray-100 mt-2">Success Score</p>
+      <div class="text-4xl sm:text-5xl font-black text-white counter" data-target="95" data-suffix="%">0%</div>
+      <p class="text-slate-400 mt-2 text-sm font-medium">Success Score</p>
     </div>
-
-    <!-- Happy Clients -->
     <div>
-      <h2 class="text-4xl font-bold text-[var(--text-color)] counter" data-target="98" data-suffix="%">0</h2>
-      <p class="text-lg text-gray-100 mt-2">Repeat Buyers</p>
+      <div class="text-4xl sm:text-5xl font-black text-white counter" data-target="98" data-suffix="%">0%</div>
+      <p class="text-slate-400 mt-2 text-sm font-medium">Repeat Buyers</p>
     </div>
-
   </div>
 </section>
 
-<!-- ===== COUNT-UP SCRIPT ===== -->
-<script>
-  function animateCounters() {
-    const counters = document.querySelectorAll('.counter');
-    counters.forEach(counter => {
-      const target = +counter.getAttribute('data-target');
-      const suffix = counter.getAttribute('data-suffix') || '';
-      const duration = 4000; // 4 seconds
-      const startTime = performance.now();
+<!-- ===== ABOUT ===== -->
+<section id="about" class="py-24 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid md:grid-cols-2 gap-16 items-center">
+      <div class="reveal">
+        <div class="badge-pill mb-6">About Us</div>
+        <h2 class="text-4xl sm:text-5xl font-black text-white leading-tight mb-6" style="letter-spacing:-0.02em;">
+          Strategy + Creativity<br><span style="color:var(--accent)">+ Automation</span>
+        </h2>
+        <p class="text-slate-400 leading-relaxed mb-4">We help brands and creators grow their online presence through smart social media strategies. Our mission is to deliver measurable growth with tailored solutions across content, AI tools, and automation.</p>
+        <p class="text-slate-400 leading-relaxed mb-8">Unlike traditional agencies, we combine strategy, creativity, and automation to maximize engagement and conversions efficiently.</p>
+        <div class="flex gap-4">
+          <a href="#services" class="btn-primary">Explore Services</a>
+        </div>
+      </div>
+      <div class="reveal grid grid-cols-2 gap-4">
 
-      const updateCount = (currentTime) => {
-        const elapsed = currentTime - startTime;
-        if(elapsed < duration) {
-          const progress = elapsed / duration;
-          const value = Math.ceil(progress * target);
-          counter.innerText = value + suffix;
-          requestAnimationFrame(updateCount);
-        } else {
-          counter.innerText = target + suffix;
-        }
-      };
+        <!-- Social Media -->
+        <div class="glass-card p-6 text-center">
+          <div class="about-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </svg>
+          </div>
+          <p class="font-semibold text-white text-sm">Social Media</p>
+          <p class="text-slate-500 text-xs mt-1">Full Management</p>
+        </div>
 
-      requestAnimationFrame(updateCount);
-    });
-  }
+        <!-- AI Tools -->
+        <div class="glass-card p-6 text-center">
+          <div class="about-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="14" rx="2"/><path d="M8 21l4-4 4 4"/><circle cx="9" cy="10" r="1" fill="currentColor" stroke="none"/><circle cx="15" cy="10" r="1" fill="currentColor" stroke="none"/><path d="M9 13s1 1 3 1 3-1 3-1"/>
+            </svg>
+          </div>
+          <p class="font-semibold text-white text-sm">AI Tools</p>
+          <p class="text-slate-500 text-xs mt-1">Automation</p>
+        </div>
 
-  function isInViewport(el) {
-    const rect = el.getBoundingClientRect();
-    return rect.top < window.innerHeight && rect.bottom >= 0;
-  }
+        <!-- Video Editing -->
+        <div class="glass-card p-6 text-center">
+          <div class="about-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/>
+            </svg>
+          </div>
+          <p class="font-semibold text-white text-sm">Video Editing</p>
+          <p class="text-slate-500 text-xs mt-1">Reels & Shorts</p>
+        </div>
 
-  let animated = false;
-  window.addEventListener('scroll', () => {
-    const section = document.getElementById('stats');
-    if(!animated && isInViewport(section)) {
-      animateCounters();
-      animated = true;
-    }
-  });
-</script>
+        <!-- Growth -->
+        <div class="glass-card p-6 text-center">
+          <div class="about-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><polyline points="2 20 22 20"/>
+            </svg>
+          </div>
+          <p class="font-semibold text-white text-sm">Growth</p>
+          <p class="text-slate-500 text-xs mt-1">Data-Driven</p>
+        </div>
 
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- ===== SERVICES ===== -->
+<section id="services" class="py-24 px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16 reveal">
+      <div class="badge-pill">What We Offer</div>
+      <h2 class="text-4xl sm:text-5xl font-black text-white mt-2" style="letter-spacing:-0.02em;">Our <span style="color:var(--accent)">Services</span></h2>
+      <p class="text-slate-400 mt-4 max-w-xl mx-auto">Everything you need to grow your brand's digital presence from one team.</p>
+    </div>
 
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
 
-
-
-  <!-- ===== 7. CONTACT ===== -->
-  <section id="contact" class="py-20 px-4 max-w-3xl mx-auto text-center">
-    <h2 class="text-3xl md:text-4xl font-bold mb-12">Get in Touch</h2>
-    <div class="grid md:grid-cols-2 gap-8">
-      <div class="bg-[#454545] rounded-xl p-8 flex flex-col items-center justify-center gap-4 shadow-lg transform transition duration-500 hover:scale-105 hover:shadow-2xl">
-        <div class="w-14 h-14 flex items-center justify-center bg-[#f5b027]/20 rounded-full transition-all duration-500 hover:bg-[#f5b027]/40 hover:animate-pulse">
-          <svg class="w-8 h-8 text-[#f5b027] transition-transform duration-500 hover:scale-125"
-            fill="none" stroke="currentColor" stroke-width="2"
-            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round"
-              d="M3 8l9 6 9-6M4 6h16a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V7a1 1 0 011-1z" />
+      <!-- Profile Setup -->
+      <div class="glass-card p-6 reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/><line x1="18" y1="8" x2="23" y2="13"/><line x1="23" y1="8" x2="18" y2="13"/>
           </svg>
         </div>
-        <h3 class="text-xl font-semibold text-white">Email</h3>
-        <p class="text-gray-300">Send me a message directly</p>
-        <button onclick="sendEmail()" class="mt-2 bg-[#f5b027] hover:bg-[#f5b027]/90 px-6 py-2 rounded font-bold text-white transition">
-          Send Email
-        </button>
+        <h3 class="text-lg font-bold text-white mb-2">Profile Setup & Integration</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">Remove Instagram bots and ghost followers. Clean up your social media accounts for authentic engagement.</p>
       </div>
 
-      <div class="bg-[#454545] rounded-xl p-8 flex flex-col items-center justify-center gap-4 shadow-lg transform transition duration-500 hover:scale-105 hover:shadow-2xl">
-        <div class="w-14 h-14 flex items-center justify-center bg-[#f5b027]/20 rounded-full transition-all duration-500 hover:bg-[#f5b027]/40 hover:animate-pulse">
-          <svg class="w-8 h-8 text-[#f5b027] transition-transform duration-500 hover:scale-125"
-            fill="currentColor" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
+      <!-- YouTube Management -->
+      <div class="glass-card p-6 reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/>
+          </svg>
+        </div>
+        <h3 class="text-lg font-bold text-white mb-2">YouTube Channel Management</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">Create a cash cow YouTube automation channel with faceless videos. Ideal for monetizing efficiently.</p>
+      </div>
+
+      <!-- Social Media Manager -->
+      <div class="glass-card p-6 reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        <h3 class="text-lg font-bold text-white mb-2">Social Media Manager</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">Full account management for growth and engagement. Consistent posting, audience interaction, and brand presence.</p>
+      </div>
+
+      <!-- Video Editor -->
+      <div class="glass-card p-6 reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/>
+          </svg>
+        </div>
+        <h3 class="text-lg font-bold text-white mb-2">Video Editor</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">Professional edits for YouTube, Instagram, and TikTok. Transform raw footage into engaging, polished content.</p>
+      </div>
+
+      <!-- Growth Hacking -->
+      <div class="glass-card p-6 reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/>
+          </svg>
+        </div>
+        <h3 class="text-lg font-bold text-white mb-2">Instagram & TikTok Growth Hacking</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">Organic strategies to boost followers and engagement quickly. Ideal for brands looking for rapid social growth.</p>
+      </div>
+
+      <!-- Reels & Shorts -->
+      <div class="glass-card p-6 reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+          </svg>
+        </div>
+        <h3 class="text-lg font-bold text-white mb-2">Reels & Shorts Creation</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">High-converting short-form videos for TikTok, Instagram, and YouTube. Boost engagement and visibility.</p>
+      </div>
+
+      <!-- Community Management -->
+      <div class="glass-card p-6 reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+        </div>
+        <h3 class="text-lg font-bold text-white mb-2">Community Management</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">Engaging your audience through comments, messages, and DMs. Build loyal followers and stronger brand relationships.</p>
+      </div>
+
+      <!-- Thumbnail Design -->
+      <div class="glass-card p-6 reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
+          </svg>
+        </div>
+        <h3 class="text-lg font-bold text-white mb-2">YouTube Thumbnail Design</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">Eye-catching thumbnails to increase your video click-through rates. Stand out in search and recommendations.</p>
+      </div>
+
+      <!-- Motion Graphics -->
+      <div class="glass-card p-6 reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/><path d="M5 3 2 6"/><path d="M19 3l3 3"/>
+          </svg>
+        </div>
+        <h3 class="text-lg font-bold text-white mb-2">Motion Graphics & Animation</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">Short animations for social media posts and video ads. Boost engagement with dynamic visuals.</p>
+      </div>
+
+      <!-- Video Repurposing -->
+      <div class="glass-card p-6 reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="1 4 1 10 7 10"/><polyline points="23 20 23 14 17 14"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/>
+          </svg>
+        </div>
+        <h3 class="text-lg font-bold text-white mb-2">Video Repurposing</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">Convert long videos into short clips for Instagram, TikTok, and Shorts. Maximize your content's reach and lifespan.</p>
+      </div>
+
+      <!-- Ad Copywriting -->
+      <div class="glass-card p-6 reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+          </svg>
+        </div>
+        <h3 class="text-lg font-bold text-white mb-2">Ad Copywriting</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">High-converting ad scripts for Facebook, Instagram, or YouTube. Attract customers and drive real sales.</p>
+      </div>
+
+      <!-- Brand Storytelling -->
+      <div class="glass-card p-6 reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+          </svg>
+        </div>
+        <h3 class="text-lg font-bold text-white mb-2">Brand Storytelling</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">Create a consistent voice and narrative for your brand. Strengthen audience connection and trust.</p>
+      </div>
+
+      <!-- AI Image Generation -->
+      <div class="glass-card p-6 reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+          </svg>
+        </div>
+        <h3 class="text-lg font-bold text-white mb-2">AI Image Generation</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">Generate visuals with AI for posts, ads, or branding. Save time and create unique graphics instantly.</p>
+      </div>
+
+      <!-- Voiceovers -->
+      <div class="glass-card p-6 reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/>
+          </svg>
+        </div>
+        <h3 class="text-lg font-bold text-white mb-2">Voiceovers & Podcast Editing</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">Professional human-like AI voiceovers and podcast edits. Enhance audio content for videos and podcasts.</p>
+      </div>
+
+      <!-- Chatbot Setup -->
+      <div class="glass-card p-6 reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="14" rx="2"/><path d="M8 21l4-4 4 4"/><circle cx="9" cy="10" r="1" fill="currentColor" stroke="none"/><circle cx="15" cy="10" r="1" fill="currentColor" stroke="none"/><path d="M9 13s1 1 3 1 3-1 3-1"/>
+          </svg>
+        </div>
+        <h3 class="text-lg font-bold text-white mb-2">Chatbot Setup</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">AI-driven customer service bots for social media or websites. Automate engagement and improve response times.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== HOW IT WORKS ===== -->
+<section id="how-it-works" class="py-24 px-6" style="background:linear-gradient(180deg, transparent, rgba(245,176,39,0.03), transparent)">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-16 reveal">
+      <div class="badge-pill">The Process</div>
+      <h2 class="text-4xl sm:text-5xl font-black text-white mt-2" style="letter-spacing:-0.02em;">How It <span style="color:var(--accent)">Works</span></h2>
+      <p class="text-slate-400 mt-4">Unlock the full potential of your brand with our proven 5-step growth framework.</p>
+    </div>
+    <div class="space-y-8">
+      <div class="timeline-step reveal">
+        <div class="step-num">1</div>
+        <div class="glass-card p-6 flex-1">
+          <h3 class="text-lg font-bold text-white mb-2">Free Consultation</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">We discuss your goals and analyze your social media presence to identify growth opportunities.</p>
+        </div>
+      </div>
+      <div class="timeline-step reveal">
+        <div class="step-num">2</div>
+        <div class="glass-card p-6 flex-1">
+          <h3 class="text-lg font-bold text-white mb-2">Strategy & Planning</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">A custom plan is created covering social media management, video content, AI tools, and posting schedules.</p>
+        </div>
+      </div>
+      <div class="timeline-step reveal">
+        <div class="step-num">3</div>
+        <div class="glass-card p-6 flex-1">
+          <h3 class="text-lg font-bold text-white mb-2">Content Creation</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">We produce high-quality content including posts, Reels, Shorts, scripts, and AI-generated visuals and voiceovers.</p>
+        </div>
+      </div>
+      <div class="timeline-step reveal">
+        <div class="step-num">4</div>
+        <div class="glass-card p-6 flex-1">
+          <h3 class="text-lg font-bold text-white mb-2">Publishing & Optimization</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Content is posted and optimized across platforms, while engagement and analytics are closely monitored.</p>
+        </div>
+      </div>
+      <div class="timeline-step reveal">
+        <div class="step-num">5</div>
+        <div class="glass-card p-6 flex-1">
+          <h3 class="text-lg font-bold text-white mb-2">Performance Reports</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Detailed monthly reports track follower growth, engagement, and conversions with actionable recommendations.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PORTFOLIO ===== -->
+<section id="portfolio" class="py-24 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16 reveal">
+      <div class="badge-pill">Our Work</div>
+      <h2 class="text-4xl sm:text-5xl font-black text-white mt-2" style="letter-spacing:-0.02em;">Portfolio <span style="color:var(--accent)">Highlights</span></h2>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+      <div class="glass-card overflow-hidden reveal">
+        <div class="relative w-full pb-[56.25%] bg-slate-800">
+          <img src="project1.jpg" alt="Social Media Growth" class="absolute inset-0 w-full h-full object-cover">
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.7),transparent);"></div>
+        </div>
+        <div class="p-5">
+          <span class="text-xs font-semibold px-2 py-1 rounded-full text-black" style="background:var(--accent)">Social Media</span>
+          <p class="text-white font-semibold mt-3 text-sm">100% Follower Increase via Targeted Strategy</p>
+        </div>
+      </div>
+      <div class="glass-card overflow-hidden reveal">
+        <div class="relative w-full pb-[56.25%] bg-slate-800">
+          <img src="project2.jpg" alt="YouTube Content" class="absolute inset-0 w-full h-full object-cover">
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.7),transparent);"></div>
+        </div>
+        <div class="p-5">
+          <span class="text-xs font-semibold px-2 py-1 rounded-full text-black" style="background:var(--accent)">YouTube</span>
+          <p class="text-white font-semibold mt-3 text-sm">3 Months of Engaging Travel Videos</p>
+        </div>
+      </div>
+      <div class="glass-card overflow-hidden reveal">
+        <div class="relative w-full pb-[56.25%] bg-slate-800">
+          <img src="project3.jpg" alt="AI Audiobook" class="absolute inset-0 w-full h-full object-cover">
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.7),transparent);"></div>
+        </div>
+        <div class="p-5">
+          <span class="text-xs font-semibold px-2 py-1 rounded-full text-black" style="background:var(--accent)">AI</span>
+          <p class="text-white font-semibold mt-3 text-sm">Transforming eBooks into Engaging Audio</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section id="testimonials" class="py-24 px-6" style="background:linear-gradient(180deg, transparent, rgba(245,176,39,0.03), transparent)">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16 reveal">
+      <div class="badge-pill">Social Proof</div>
+      <h2 class="text-4xl sm:text-5xl font-black text-white mt-2" style="letter-spacing:-0.02em;">What Clients <span style="color:var(--accent)">Say</span></h2>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div class="testimonial-card reveal">
+        <div class="flex mb-3"><span style="color:var(--accent)" class="text-lg">★★★★★</span></div>
+        <p class="text-slate-300 text-sm leading-relaxed mb-4">"Es buenísimo trabajar con ella"</p>
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold text-black" style="background:var(--accent)">L</div>
+          <div><p class="text-white text-sm font-semibold">lucvalls</p><p class="text-slate-500 text-xs">Spain · Profile Setup</p></div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="flex mb-3"><span style="color:var(--accent)" class="text-lg">★★★★★</span></div>
+        <p class="text-slate-300 text-sm leading-relaxed mb-4">"Working with Aqsa is always synonymous with guaranteed service and results."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold text-black" style="background:var(--accent)">L</div>
+          <div><p class="text-white text-sm font-semibold">lucvalls</p><p class="text-slate-500 text-xs">Spain · YouTube Management</p></div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="flex mb-3"><span style="color:var(--accent)" class="text-lg">★★★★★</span></div>
+        <p class="text-slate-300 text-sm leading-relaxed mb-4">"Good job Aqsa! Your attention to details and professionalism is highly appreciated. I wish you all the very best!"</p>
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold text-black" style="background:var(--accent)">A</div>
+          <div><p class="text-white text-sm font-semibold">akbarhero</p><p class="text-slate-500 text-xs">Canada · Text-to-speech</p></div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="flex mb-3"><span style="color:var(--accent)" class="text-lg">★★★★★</span></div>
+        <p class="text-slate-300 text-sm leading-relaxed mb-4">"Thank you for your kindness and your hard work. I will be back for more because of your professionalism."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold text-black" style="background:var(--accent)">I</div>
+          <div><p class="text-white text-sm font-semibold">iconicreview</p><p class="text-slate-500 text-xs">US · YouTube Management</p></div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="flex mb-3"><span style="color:var(--accent)" class="text-lg">★★★★★</span></div>
+        <p class="text-slate-300 text-sm leading-relaxed mb-4">"Aqsa Zahid did FANTASTIC work, with a lot of attention to detail, deep strategic thinking, and a richness about the task. Collaborating with her was a delight."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold text-black" style="background:var(--accent)">J</div>
+          <div><p class="text-white text-sm font-semibold">jbags1275</p><p class="text-slate-500 text-xs">UAE · YouTube Management</p></div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="flex mb-3"><span style="color:var(--accent)" class="text-lg">★★★★★</span></div>
+        <p class="text-slate-300 text-sm leading-relaxed mb-4">"This Lady has made me Love this platform she is very Professional and helpful"</p>
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold text-black" style="background:var(--accent)">K</div>
+          <div><p class="text-white text-sm font-semibold">kudashonhiwa1</p><p class="text-slate-500 text-xs">UK · YouTube Management</p></div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="flex mb-3"><span style="color:var(--accent)" class="text-lg">★★★★★</span></div>
+        <p class="text-slate-300 text-sm leading-relaxed mb-4">"so good and fast"</p>
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold text-black" style="background:var(--accent)">M</div>
+          <div><p class="text-white text-sm font-semibold">mark78439</p><p class="text-slate-500 text-xs">Germany · Profile Setup</p></div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="flex mb-3"><span style="color:var(--accent)" class="text-lg">★★★★★</span></div>
+        <p class="text-slate-300 text-sm leading-relaxed mb-4">"The best ever. Thanks a lot"</p>
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold text-black" style="background:var(--accent)">M</div>
+          <div><p class="text-white text-sm font-semibold">mohamedlahkimbe</p><p class="text-slate-500 text-xs">Morocco · YouTube Management</p></div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="flex mb-3"><span style="color:var(--accent)" class="text-lg">★★★★★</span></div>
+        <p class="text-slate-300 text-sm leading-relaxed mb-4">"Aqsa is the best. Great communication and very easy to work with. I highly recommend!"</p>
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold text-black" style="background:var(--accent)">A</div>
+          <div><p class="text-white text-sm font-semibold">amatyleon</p><p class="text-slate-500 text-xs">US · YouTube Management</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact" class="py-24 px-6">
+  <div class="max-w-3xl mx-auto text-center">
+    <div class="badge-pill mb-4">Get in Touch</div>
+    <h2 class="text-4xl sm:text-5xl font-black text-white mb-4" style="letter-spacing:-0.02em;">Ready to <span style="color:var(--accent)">Grow?</span></h2>
+    <p class="text-slate-400 mb-12">Let's build something great together. Reach out through any channel below.</p>
+    <div class="grid sm:grid-cols-2 gap-6">
+      <div class="contact-card reveal text-left">
+        <div class="contact-icon">
+          <svg class="w-7 h-7" style="color:var(--accent)" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l9 6 9-6M4 6h16a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V7a1 1 0 011-1z"/>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-white mb-2">Email</h3>
+        <p class="text-slate-400 text-sm mb-6">Send me a message directly and I'll respond within 24 hours.</p>
+        <button onclick="sendEmail()" class="btn-primary w-full justify-center">Send Email</button>
+      </div>
+      <div class="contact-card reveal text-left">
+        <div class="contact-icon">
+          <svg class="w-7 h-7" style="color:var(--accent)" fill="currentColor" viewBox="0 0 448 512">
             <path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 01107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"/>
           </svg>
         </div>
-        <h3 class="text-xl font-semibold text-white">LinkedIn</h3>
-        <p class="text-gray-300">Connect with me professionally</p>
-        <button onclick="openLinkedIn()" class="mt-2 bg-[#f5b027] hover:bg-[#f5b027]/90 px-6 py-2 rounded font-bold text-white transition">
-          View Profile
+        <h3 class="text-xl font-bold text-white mb-2">LinkedIn</h3>
+        <p class="text-slate-400 text-sm mb-6">Connect with me professionally and explore my full work history.</p>
+        <button onclick="openLinkedIn()" class="btn-outline w-full justify-center">View Profile</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section id="faq" class="py-24 px-6" style="background:linear-gradient(180deg, transparent, rgba(245,176,39,0.02), transparent)">
+  <div class="max-w-3xl mx-auto">
+    <div class="text-center mb-14 reveal">
+      <div class="badge-pill">FAQ</div>
+      <h2 class="text-4xl sm:text-5xl font-black text-white mt-2" style="letter-spacing:-0.02em;">Common <span style="color:var(--accent)">Questions</span></h2>
+    </div>
+    <div class="space-y-3 reveal">
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          How long does it take to grow my Instagram or YouTube channel?
+          <svg class="faq-chevron w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
         </button>
+        <div class="faq-answer">Initial engagement improvements are usually visible within 4–6 weeks. Significant growth typically occurs over 3–6 months with consistent strategy and quality content.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Can you manage both Instagram and YouTube for my brand?
+          <svg class="faq-chevron w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        </button>
+        <div class="faq-answer">Yes, we provide full management for Instagram and YouTube, including content creation, posting schedules, SEO optimization, and engagement with your audience.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Do you create custom content for my niche?
+          <svg class="faq-chevron w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        </button>
+        <div class="faq-answer">Absolutely. We research your industry and audience to produce engaging posts, reels, and videos tailored to your brand's style and goals.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          What video editing services do you offer?
+          <svg class="faq-chevron w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        </button>
+        <div class="faq-answer">We provide professional editing for YouTube videos, Instagram reels, promotional clips, and ads, including transitions, effects, subtitles, and thumbnails.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          How do I get started with your services?
+          <svg class="faq-chevron w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        </button>
+        <div class="faq-answer">Simply book a free strategy call or audit via our website. We'll create a custom plan for your Instagram and YouTube growth and content strategy.</div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ===== 8. FAQ ===== -->
- <section id="faq" class="py-20 px-4 max-w-4xl mx-auto text-center fade-section">
-
-    <h2 class="text-3xl md:text-4xl font-bold mb-12">FAQ</h2>
-    <div class="space-y-6 text-left">
-      <div>
-        <p><strong><span class="text-[#f5b027]">Q:</span></strong> How long does it take to grow my Instagram or YouTube channel?</p>
-        <p><strong>A:</strong> Initial engagement improvements are usually visible within 4–6 weeks. Significant growth typically occurs over 3–6 months with consistent strategy and quality content.</p>
+<!-- ===== FOOTER ===== -->
+<footer class="py-12 px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex flex-col md:flex-row justify-between items-center gap-6 mb-8 pb-8" style="border-bottom:1px solid var(--border)">
+      <div class="text-xl font-bold text-white">Aqsa Zahid<span style="color:var(--accent)">.</span></div>
+      <div class="flex gap-8 text-sm text-slate-400 font-medium">
+        <a href="#about" class="hover:text-white transition">About</a>
+        <a href="#services" class="hover:text-white transition">Services</a>
+        <a href="#portfolio" class="hover:text-white transition">Portfolio</a>
+        <a href="#contact" class="hover:text-white transition">Contact</a>
       </div>
-      
-      <div>
-        <p><strong><span class="text-[#f5b027]">Q:</span></strong> Can you manage both Instagram and YouTube for my brand?</p>
-        <p><strong>A:</strong> Yes, we provide full management for Instagram and YouTube, including content creation, posting schedules, SEO optimization, and engagement with your audience.</p>
-      </div>
-      
-      <div>
-        <p><strong><span class="text-[#f5b027]">Q:</span></strong> Do you create custom content for my niche?</p>
-        <p><strong>A:</strong> Absolutely. We research your industry and audience to produce engaging posts, reels, and videos tailored to your brand's style and goals.</p>
-      </div>
-      
-      <div>
-        <p><strong><span class="text-[#f5b027]">Q:</span></strong> What video editing services do you offer?</p>
-        <p><strong>A:</strong> We provide professional editing for YouTube videos, Instagram reels, promotional clips, and ads, including transitions, effects, subtitles, and thumbnails.</p>
-      </div>
-      
-      <div>
-        <p><strong><span class="text-[#f5b027]">Q:</span></strong> How do I get started with your services?</p>
-        <p><strong>A:</strong> Simply book a free strategy call or audit via our website. We'll create a custom plan for your Instagram and YouTube growth and content strategy.</p>
+      <div class="flex gap-4">
+        <a href="https://teams.live.com/meet/9314979560881?p=vLnClCGYnCj57llrXf" target="_blank" class="btn-primary text-sm py-2 px-5">Book a Call</a>
       </div>
     </div>
-  </section>
-
-  <!-- ===== 9. FOOTER ===== -->
-  <footer class="bg-[#343434] text-white py-10">
-    <div class="container mx-auto px-4 flex flex-col gap-8">
-      <div class="flex flex-col md:flex-row justify-center items-center gap-3">
-        <div class="text-2xl font-bold">
-          Aqsa Zahid<span class="text-[#f5b027]">.</span>
-        </div>
-        
-        <div class="flex flex-col sm:flex-row gap-4 text-sm md:text-base">
-          <a href="#home" class="hover:text-[#f5b027] transition-colors">Home</a>
-          <a href="#about" class="hover:text-[#f5b027] transition-colors">About</a>
-          <a href="#services" class="hover:text-[#f5b027] transition-colors">Services</a>
-          <a href="#contact" class="hover:text-[#f5b027] transition-colors">Contact</a>
-        </div>
-      </div>
-
-      <div class="text-center text-sm text-gray-400">
-        <p>&copy; <span id="currentYear"></span> Aqsa Zahid. All rights reserved.</p>
-        <p class="mt-1">
-          <a href="#" class="hover:text-[#f5b027] transition-colors">Privacy Policy</a> |
-          <a href="#" class="hover:text-[#f5b027] transition-colors">Terms</a>
-        </p>
+    <div class="flex flex-col sm:flex-row justify-between items-center gap-3 text-sm text-slate-600">
+      <p>© <span id="currentYear"></span> Aqsa Zahid. All rights reserved.</p>
+      <div class="flex gap-4">
+        <a href="#" class="hover:text-slate-400 transition">Privacy Policy</a>
+        <a href="#" class="hover:text-slate-400 transition">Terms</a>
       </div>
     </div>
-  </footer>
+  </div>
+</footer>
 
-  <!-- JavaScript -->
+<!-- ===== JS ===== -->
 <script>
-  /* ===== Scroll-triggered card animations (Services, Testimonials, etc.) ===== */
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
       if (entry.isIntersecting) {
-        const delay = Number(entry.target.dataset.delay) || 0;
-        setTimeout(() => entry.target.classList.add('visible'), delay);
-        observer.unobserve(entry.target);
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        revealObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.2 });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-  document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+  function animateCounter(el) {
+    const target = +el.dataset.target;
+    const suffix = el.dataset.suffix || '';
+    const duration = 2000;
+    const start = performance.now();
+    const update = (now) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.ceil(ease * target) + suffix;
+      if (progress < 1) requestAnimationFrame(update);
+    };
+    requestAnimationFrame(update);
+  }
 
+  let countersStarted = false;
+  const statsObs = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting && !countersStarted) {
+      countersStarted = true;
+      document.querySelectorAll('.counter').forEach(animateCounter);
+    }
+  }, { threshold: 0.3 });
+  const statsSection = document.querySelector('.stats-band');
+  if (statsSection) statsObs.observe(statsSection);
 
-  /* ===== Fade-up section animations (About, How It Works, FAQ) ===== */
-  const fadeObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          fadeObserver.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.15 }
-  );
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
 
-  document.querySelectorAll(".fade-section").forEach(section => {
-    fadeObserver.observe(section);
-  });
-
-
-  /* ===== Email function (Gmail open) ===== */
   function sendEmail() {
-    const email = "azmughal5969@example.com";
-    const gmailUrl = `https://mail.google.com/mail/?view=cm&to=${email}`;
-    window.open(gmailUrl, "_blank");
+    window.open('https://mail.google.com/mail/?view=cm&to=azmughal5969@example.com', '_blank');
   }
 
-
-  /* ===== LinkedIn function ===== */
   function openLinkedIn() {
-    window.open("https://www.linkedin.com/in/aqsa-zahid-4a9099325/", "_blank");
+    window.open('https://www.linkedin.com/in/aqsa-zahid-4a9099325/', '_blank');
   }
 
-
-  /* ===== Set current year in footer ===== */
-  document.getElementById('currentYear').textContent = new Date().getFullYear();
-
-
-  /* ===== Smooth scrolling for internal links ===== */
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
       e.preventDefault();
-      const targetId = this.getAttribute('href');
-      if (targetId === '#') return;
-
-      const targetElement = document.querySelector(targetId);
-      if (targetElement) {
-        window.scrollTo({
-          top: targetElement.offsetTop - 80,
-          behavior: 'smooth'
-        });
-      }
+      const el = document.querySelector(a.getAttribute('href'));
+      if (el) window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' });
     });
   });
+
+  document.getElementById('currentYear').textContent = new Date().getFullYear();
 </script>
 </body>
 </html>
-
